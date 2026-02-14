@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPU Architecture Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="container">
+  <div class="vendor-tabs">
+    <button class="vendor-tab active-amd" id="tabAmd" onclick="switchVendor('amd')">AMD</button>
+    <div class="vendor-tab-divider"></div>
+    <button class="vendor-tab" id="tabIntel" onclick="switchVendor('intel')">Intel</button>
+  </div>
+  <header id="pageHeader">
+    <h1 class="header-intel">Intel Client + Server Roadmap</h1>
+    <p>Processor Architecture Generations</p>
+  </header>
+  <div class="tech-tabs" id="techTabs">
+    <button class="tech-tab active" id="techTabCpu" onclick="switchTech('cpu')">CPU</button>
+    <div class="tech-tab-divider"></div>
+    <button class="tech-tab" id="techTabGpu" onclick="switchTech('gpu')">GPU</button>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input type="text" id="searchInput" placeholder="Search architectures, SKUs, brands...">
+  </div>
+  <div class="legend" id="legendToggles"></div>
+  <div class="controls" id="filterControls"></div>
+  <div class="toolbar">
+    <button class="expand-all-btn" id="expandAllBtn">Expand All</button>
+    <button class="expand-all-btn" id="collapseAllBtn">Collapse All</button>
+  </div>
+  <div id="codenameTableWrap"></div>
+  <div class="timeline" id="timeline"></div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

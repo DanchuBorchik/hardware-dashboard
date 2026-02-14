@@ -1,0 +1,17 @@
+# System files
+nohup.out
+*.log
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dependencies (if we add them later)
+node_modules/

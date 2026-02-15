@@ -5,8 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-### Performance Improvements Planned
-- [ ] Task #7: Virtual scrolling (P2 - 2-3 days)
+### Performance Improvements Skipped
+- Task #7: Virtual scrolling - Skipped. Current performance is excellent for the dataset size (~50 architectures). Virtual scrolling would add complexity without significant benefit for the current scale.
 
 ## [0.3.0] - 2026-02-14
 

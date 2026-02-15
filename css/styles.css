@@ -267,7 +267,7 @@
   .sku-card.has-specs:hover .sku-spec-toggle { opacity: 1; }
   .sku-spec-count { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--accent); opacity: 0.7; margin-left: 6px; }
   .sku-card { order: var(--card-order, 0); }
-  .cpu-spec-wrapper { display: none; grid-column: 1 / -1; margin: -4px 0 8px 0; order: var(--spec-order, 0); }
+  .cpu-spec-wrapper { display: none; grid-column: 1 / -1; margin: -4px 0 8px 0; order: var(--spec-order, 0); max-width: 100%; width: 100%; box-sizing: border-box; }
   .cpu-spec-wrapper.open { display: block; animation: fadeSlide 0.2s ease; }
   @keyframes fadeSlide { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
   .cpu-spec-overflow {
@@ -296,7 +296,7 @@
   @media (max-width: 768px) {
     .container { padding: 32px 16px 60px; }
     header h1 { font-size: 1.5rem; }
-    .skus-grid { grid-template-columns: 1fr; }
+    .skus-grid { grid-template-columns: minmax(0, 1fr); max-width: 100%; width: 100%; }
     .legend { font-size: 0.7rem; }
     .legend-item { padding: 7px 12px; gap: 5px; }
     .filter-btn { padding: 10px 14px; font-size: 0.7rem; }
@@ -317,7 +317,7 @@
     .timeline { padding-left: 30px; }
     .timeline::before { left: 10px; width: 1.5px; }
     .timeline-dot { left: -26px; width: 10px; height: 10px; }
-    .skus-grid { grid-template-columns: 1fr; gap: 8px; }
+    .skus-grid { grid-template-columns: minmax(0, 1fr); gap: 8px; max-width: 100%; width: 100%; }
     .arch-name { font-size: 0.95rem; }
     .arch-year { font-size: 0.7rem; padding: 2px 8px; }
     .arch-segment-badge { display: none; }
@@ -353,7 +353,7 @@
     .cpu-spec-table th, .cpu-spec-table td { padding: 5px 4px; }
     .tech-tab { font-size: 0.75rem; padding: 8px 20px; min-height: 44px; }
     .tech-tabs { margin-bottom: 8px; }
-    .sku-card { padding: 12px 14px; }
+    .sku-card { padding: 12px 14px; max-width: 100%; width: 100%; box-sizing: border-box; }
     .sku-name { font-size: 0.8rem; margin-bottom: 5px; }
     .sku-desc { font-size: 0.75rem; }
     .sku-tags { gap: 5px; margin-top: 8px; }

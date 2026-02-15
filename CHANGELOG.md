@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed
+- Mobile layout stability when expanding spec tables (2026-02-15):
+  - Fixed font size inconsistency where SKU cards appeared larger after opening spec tables
+  - Prevented grid columns from expanding beyond viewport with minmax(0, 1fr)
+  - Fixed scroll behavior so only tables scroll horizontally, not entire content
+  - Added explicit width constraints to prevent layout shifts on mobile
+  - Constrained .skus-grid, .sku-card, and .cpu-spec-wrapper to 100% width with box-sizing
+
 ### Added
 - Mobile-responsive design improvements:
   - Touch-friendly tap targets (44x44px minimum) for all interactive elements

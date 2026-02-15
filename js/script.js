@@ -436,7 +436,6 @@ function render() {
 
   // Safety check: Don't render if data isn't loaded yet
   if (!data || !Array.isArray(data)) {
-    console.warn('render() called but data not loaded yet');
     perfEnd('render');
     return;
   }

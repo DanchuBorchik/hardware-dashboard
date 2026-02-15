@@ -192,7 +192,7 @@
   .codename-table-body { overflow: hidden; transition: max-height 0.4s ease; max-height: 600px; overflow-x: auto; }
   .codename-table-wrap.collapsed .codename-table-body { max-height: 0; }
   .codename-table {
-    width: 100%; border-collapse: collapse; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+    min-width: 100%; width: max-content; border-collapse: collapse; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
   }
   .codename-table th {
     text-align: left; padding: 8px 12px; color: var(--text-muted); font-weight: 500;
@@ -228,7 +228,7 @@
 
   /* GPU spec tables inside cards */
   .gpu-spec-table {
-    width: 100%; border-collapse: collapse; font-family: 'JetBrains Mono', monospace;
+    min-width: 100%; width: max-content; border-collapse: collapse; font-family: 'JetBrains Mono', monospace;
     font-size: 0.68rem; margin-top: 10px;
   }
   .gpu-spec-table th {
@@ -277,7 +277,7 @@
     background: rgba(0,0,0,0.15);
     -webkit-overflow-scrolling: touch;
   }
-  .cpu-spec-table { width: 100%; border-collapse: collapse; font-size: 0.68rem; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+  .cpu-spec-table { min-width: 100%; width: max-content; border-collapse: collapse; font-size: 0.68rem; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
   .cpu-spec-table th { padding: 8px 10px; text-align: left; color: var(--text-muted); font-weight: 600; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border-subtle); background: rgba(255,255,255,0.02); position: sticky; top: 0; z-index: 1; }
   .cpu-spec-table td { padding: 6px 10px; color: var(--text-secondary); border-bottom: 1px solid rgba(255,255,255,0.03); }
   .cpu-spec-table tbody tr { transition: background 0.15s ease; }

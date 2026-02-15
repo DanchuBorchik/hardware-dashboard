@@ -95,6 +95,8 @@
   .sku-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; opacity: 0.6; transition: opacity 0.2s ease; }
   .sku-card:hover { border-color: rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); }
   .sku-card:hover::before { opacity: 1; }
+  .sku-card.selected { border-color: var(--arch-color); background: rgba(255,255,255,0.08); box-shadow: 0 0 0 1px var(--arch-color), 0 4px 12px rgba(0,0,0,0.3); }
+  .sku-card.selected::before { opacity: 1; width: 4px; }
   .sku-name { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; }
   .sku-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
   .sku-tags { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
@@ -256,7 +258,8 @@
   .sku-spec-toggle { position: absolute; top: 8px; right: 8px; font-size: 0.6rem; color: var(--text-muted); opacity: 0.5; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.5px; text-transform: uppercase; transition: opacity 0.2s; pointer-events: none; }
   .sku-card.has-specs:hover .sku-spec-toggle { opacity: 1; }
   .sku-spec-count { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--accent); opacity: 0.7; margin-left: 6px; }
-  .cpu-spec-wrapper { display: none; grid-column: 1 / -1; margin: -4px 0 8px 0; }
+  .sku-card { order: var(--card-order, 0); }
+  .cpu-spec-wrapper { display: none; grid-column: 1 / -1; margin: -4px 0 8px 0; order: var(--spec-order, 0); }
   .cpu-spec-wrapper.open { display: block; animation: fadeSlide 0.2s ease; }
   @keyframes fadeSlide { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
   .cpu-spec-overflow { overflow-x: auto; border: 1px solid var(--border-subtle); border-radius: 8px; background: rgba(0,0,0,0.15); }
@@ -269,9 +272,9 @@
   .cpu-spec-table .cpu-model-name { color: var(--text-primary); font-weight: 600; }
   .cpu-spec-table .cpu-val-highlight { color: #4ade80; }
   .cpu-spec-table .cpu-val-gpu { color: #38bdf8; }
-  .collapse-specs-btn { display: none; margin: 4px 0 2px auto; padding: 3px 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle); border-radius: 4px; cursor: pointer; transition: all 0.15s ease; }
+  .collapse-specs-btn { visibility: hidden; opacity: 0; margin: 4px 0 2px auto; padding: 3px 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle); border-radius: 4px; cursor: pointer; transition: all 0.15s ease; pointer-events: none; }
   .collapse-specs-btn:hover { color: var(--text-primary); background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); }
-  .collapse-specs-btn.visible { display: block; }
+  .collapse-specs-btn.visible { visibility: visible; opacity: 1; pointer-events: auto; }
   .cpu-spec-header { display: flex; align-items: center; justify-content: space-between; padding: 6px 12px; }
   .cpu-spec-header-title { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
   @media (max-width: 768px) {

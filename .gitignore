@@ -18,3 +18,8 @@ node_modules/
 
 # Claude Code memory
 .claude/
+
+# Development/testing files
+test*.html
+TEST*.md
+debug*.html

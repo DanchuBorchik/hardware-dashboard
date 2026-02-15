@@ -1,101 +1,138 @@
-# Hardware Dashboard
+# Hardware Portal
 
-An interactive web-based roadmap for CPU architectures from Intel and AMD, featuring detailed information about processor generations, SKUs, and specifications.
+A comprehensive hub for navigating the modern Silicon landscape. This interactive web application provides detailed architectural timelines, specifications, and product information for Intel and AMD processors, as well as AMD GPU accelerators.
+
+## Purpose
+
+Hardware Portal serves as a centralized reference for understanding the evolution and current state of x86 CPU architectures and CDNA GPU accelerators. It provides technical professionals, enthusiasts, and researchers with quick access to:
+
+- Historical and current processor architectures
+- Detailed SKU specifications and segmentation
+- Architectural relationships and generational progressions
+- Market positioning and product differentiation
 
 ## Features
 
-- **Dual Vendor Support**: Switch between Intel and AMD processor roadmaps
-- **Interactive Timeline**: Collapsible architecture groups organized by era
-- **Advanced Filtering**: Filter by segment (desktop, mobile, server, embedded)
-- **Search Functionality**: Quickly find specific architectures, SKUs, or brands
-- **Tag-based Navigation**: Click legend items to filter content
-- **GPU Support**: AMD Instinct accelerator information (CDNA architecture)
-- **Detailed Specifications**: Expandable CPU/GPU spec tables for supported processors
-- **Dark Theme**: Modern, readable interface with custom styling
+- **Multi-Vendor Coverage**: Intel CPUs, AMD CPUs (Zen family), AMD GPU Accelerators (CDNA)
+- **Architectural Timeline**: Chronological view of processor generations and microarchitectures
+- **Segment Filtering**: Desktop, mobile, server, embedded, and workstation categories
+- **Brand Filtering**: Filter by product lines (Core, Xeon, Ryzen, EPYC, Threadripper, Instinct)
+- **Search**: Real-time search across architectures, SKUs, and specifications
+- **Expandable Specifications**: Detailed CPU/GPU spec tables with core counts, frequencies, TDP, and more
+- **Performance Optimized**: CSS-based filtering, lazy-loaded data, sub-5ms filter operations
 
 ## Project Structure
 
 ```
 hardware_portal/
-├── index.html           # Main HTML file
+├── index.html                      # Main entry point
 ├── css/
-│   └── styles.css      # All styles and theming
+│   └── styles.css                  # Styling and animations
 ├── js/
-│   └── script.js       # Application logic and data
-├── .gitignore          # Git ignore rules
-└── README.md           # This file
+│   ├── script.js                   # Application logic
+│   └── data/                       # JSON data files (lazy-loaded)
+│       ├── intel-data.json         # Intel CPU architectures
+│       ├── amd-data.json           # AMD CPU architectures
+│       ├── amd-gpu-data.json       # AMD GPU accelerators
+│       └── amd-cpu-specs.json      # Detailed AMD CPU specifications
+├── docs/
+│   └── AUDIT-2026-02-14.md        # Performance audit report
+├── CHANGELOG.md                    # Version history and changes
+└── README.md                       # Documentation
 ```
 
-## How to Use
+## Deployment
 
 ### Local Development
 
-1. Simply open `index.html` in a web browser
-2. No build step or dependencies required
-3. Works completely offline once loaded
+Run a local web server in the project directory:
 
-### Deployment Options
+```bash
+python3 -m http.server 8084
+```
+
+Access at `http://localhost:8084`
+
+### Production Deployment
 
 **GitHub Pages:**
-1. Push to GitHub
-2. Go to repository Settings → Pages
-3. Select branch (main) and root folder
-4. Your site will be live at `https://yourusername.github.io/hardware-dashboard/`
+1. Enable Pages in repository Settings
+2. Select `main` branch and `/ (root)` directory
+3. Site will be available at `https://username.github.io/repository-name/`
 
-**Netlify:**
-1. Drag and drop the project folder to [Netlify Drop](https://app.netlify.com/drop)
-2. Or connect your GitHub repository for automatic deployments
+**Static Hosting:**
+Upload all files to any static web host. The application requires no server-side processing or database. All data is loaded dynamically via JSON files.
 
-**Any Static Host:**
-- Upload all files to any web server
-- No server-side processing required
+## Data Management
 
-## Adding New Hardware
+Architecture and SKU data is stored in JSON files located in `js/data/`:
 
-To add new processors or architectures:
+- **intel-data.json**: Intel CPU architectures and SKUs
+- **amd-data.json**: AMD CPU architectures and SKUs
+- **amd-gpu-data.json**: AMD GPU accelerators (CDNA)
+- **amd-cpu-specs.json**: Detailed specifications for AMD CPUs
 
-1. Open `js/script.js`
-2. Find the appropriate data array:
-   - `INTEL_DATA` for Intel CPUs
-   - `AMD_DATA` for AMD CPUs
-   - `AMD_GPU_DATA` for AMD GPUs
-3. Add new entries following the existing format
-4. Save and refresh the page
+### Adding New Architectures
 
-### Data Format Example
+Edit the appropriate JSON file and add entries following the existing schema:
 
-```javascript
+```json
 {
-  id: 'unique-id',
-  arch: 'Architecture Name',
-  color: '#hex-color',
-  year: '2024',
-  segment: 'client',
-  defaultLinks: [{ label: 'Wikipedia', url: 'https://...' }],
-  skus: [
-    { name: 'SKU Name', desc: 'Description', tags: ['desktop', 'mobile'], brand: 'Brand' }
+  "id": "unique-identifier",
+  "arch": "Architecture Name",
+  "color": "#hexcolor",
+  "year": "2024",
+  "segment": "client|server|mobile|embedded",
+  "defaultLinks": [{"label": "Source", "url": "https://..."}],
+  "skus": [
+    {
+      "name": "Product SKU",
+      "desc": "Description",
+      "tags": ["desktop", "mobile"],
+      "brand": "Product Line"
+    }
   ]
 }
 ```
 
-## Technologies Used
+Data is lazy-loaded on vendor switch and cached for performance.
 
-- **HTML5**: Semantic markup
-- **CSS3**: Modern styling with custom properties and animations
-- **Vanilla JavaScript**: No frameworks or dependencies
-- **Google Fonts**: DM Sans and JetBrains Mono
+## Technical Architecture
 
-## Browser Support
+- **HTML5**: Semantic markup structure
+- **CSS3**: Custom properties, animations, responsive design
+- **Vanilla JavaScript**: Zero dependencies, pure ES6+
+- **Performance**:
+  - CSS-based filtering (95% faster than DOM re-rendering)
+  - Debounced search (300ms)
+  - DOM caching system
+  - Lazy-loaded JSON data with caching
+  - Sub-5ms filter operations
 
-- Chrome/Edge (latest)
-- Firefox (latest)
-- Safari (latest)
-- Mobile browsers supported
+## Performance Metrics
 
-## License
+- Initial load: ~200ms (excluding network)
+- Filter/search: <5ms
+- Vendor switch: ~200-300ms (includes data fetch on first load)
+- Animation duration: 450ms
 
-Personal project - feel free to fork and modify for your own use.
+## Browser Compatibility
 
-## Acknowledgments
+Modern browsers with ES6+ support:
+- Chrome/Edge 90+
+- Firefox 88+
+- Safari 14+
+- Mobile browsers (iOS Safari, Chrome Mobile)
 
-Data sourced from public specifications, Wikipedia, and official vendor roadmaps.
+## Data Sources
+
+Architecture and specification data compiled from:
+- Official vendor documentation and roadmaps
+- Public processor specifications
+- Industry announcements and technical publications
+- Wikipedia and verified technical resources
+
+## Repository
+
+**GitHub**: https://github.com/DanchuBorchik/hardware-dashboard
+**Live Site**: https://danchuborchik.github.io/hardware-dashboard/

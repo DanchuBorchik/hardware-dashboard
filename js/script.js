@@ -417,6 +417,14 @@ function render() {
   const cfg = VENDOR_CONFIG[currentVendor];
   const isGpu = currentTechTab === 'gpu' && cfg.gpuData;
   const data = isGpu ? cfg.gpuData : cfg.data;
+
+  // Safety check: Don't render if data isn't loaded yet
+  if (!data || !Array.isArray(data)) {
+    console.warn('render() called but data not loaded yet');
+    perfEnd('render');
+    return;
+  }
+
   timeline.innerHTML = '';
   let animIndex = 0;
 

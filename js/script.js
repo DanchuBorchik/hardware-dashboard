@@ -446,6 +446,7 @@ function render() {
     const arch = entry;
 
     const isExpanded = expandedGroups.has(arch.id);
+    console.log(`Rendering arch: ${arch.arch} with ${arch.skus?.length || 0} SKUs`);
     const group = document.createElement('div');
     group.className = `arch-group${isExpanded ? ' expanded' : ''}`;
     group.style.setProperty('--arch-color', arch.color);

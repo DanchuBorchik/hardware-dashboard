@@ -5,6 +5,35 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+- Mobile-responsive design improvements:
+  - Touch-friendly tap targets (44x44px minimum) for all interactive elements
+  - Horizontal scrolling for spec tables with -webkit-overflow-scrolling: touch
+  - Three responsive breakpoints: 768px (tablet), 640px (mobile), 375px (small mobile)
+  - Enhanced scrollbar styling for better visibility (8px height on mobile)
+  - Collapsible codename table with horizontal scroll on mobile
+  - Optimized font sizes and spacing for smaller screens
+  - Touch-optimized padding for buttons, tabs, and legend items
+
+### Changed
+- Improved table scrolling behavior:
+  - Added -webkit-overflow-scrolling: touch for smooth momentum scrolling on iOS
+  - Increased scrollbar thickness from 6px to 8px for better touch interaction
+  - Applied overflow-x: auto to codename table body for horizontal scrolling
+- Enhanced mobile layout:
+  - Single-column SKU grid on mobile devices (below 768px)
+  - Reduced timeline dot size and repositioned for compact layouts
+  - Hidden architecture segment badges on mobile to save space
+  - Adjusted header sizes, margins, and padding for mobile screens
+  - Optimized search input and filter controls for touch interaction
+- Increased minimum button sizes for WCAG accessibility compliance
+
+### Fixed
+- Tables now scroll horizontally on mobile devices (primary issue resolved)
+- Touch targets meet 44x44px accessibility standard for better mobile usability
+- Expand/collapse functionality works smoothly on touch devices
+- Filter controls properly wrap on narrow screens
+
 ### Performance Improvements Skipped
 - Task #7: Virtual scrolling - Skipped. Current performance is excellent for the dataset size (~50 architectures). Virtual scrolling would add complexity without significant benefit for the current scale.
 

@@ -14,6 +14,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Constrained .skus-grid, .sku-card, and .cpu-spec-wrapper to 100% width with box-sizing
 
 ### Added
+- Search clear button (2026-02-15):
+  - X button appears inside search input when typing
+  - Click to instantly clear search and reset results
+  - Auto-hides when search is empty
+  - Hover effect for better visibility
 - CPU comparison features (2026-02-15):
   - Search highlighting: CPU model names in spec tables highlight yellow when searched
   - Manual row selection: Click any CPU spec table row to highlight green for comparison

@@ -35,10 +35,13 @@
   header p { color: var(--text-secondary); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; }
 
   .search-wrap { max-width: 400px; margin: 0 auto 20px; position: relative; }
-  .search-wrap input { width: 100%; padding: 10px 16px 10px 40px; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; outline: none; transition: border-color 0.2s ease; }
+  .search-wrap input { width: 100%; padding: 10px 40px 10px 40px; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 8px; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; outline: none; transition: border-color 0.2s ease; }
   .search-wrap input:focus { border-color: rgba(255,255,255,0.2); }
   .search-wrap input::placeholder { color: var(--text-muted); }
   .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.9rem; }
+  .search-clear { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1.1rem; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, color 0.2s ease; }
+  .search-clear.visible { opacity: 1; pointer-events: auto; }
+  .search-clear:hover { color: var(--text-primary); }
 
   .legend { display: flex; gap: 8px; justify-content: center; margin-bottom: 28px; flex-wrap: wrap; align-items: center; }
   .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; padding: 8px 14px; border-radius: 20px; border: 1px solid var(--border-subtle); cursor: pointer; transition: all 0.25s ease; user-select: none; min-height: 40px; }

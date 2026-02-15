@@ -149,6 +149,7 @@ function initDomCache() {
   dom = {
     timeline: document.getElementById('timeline'),
     searchInput: document.getElementById('searchInput'),
+    searchClear: document.getElementById('searchClear'),
     pageHeader: document.getElementById('pageHeader'),
     legendToggles: document.getElementById('legendToggles'),
     filterControls: document.getElementById('filterControls'),
@@ -1098,7 +1099,18 @@ setupRowSelectionHandlers();
 
 // Search (with debouncing for performance)
 const debouncedFilter = debounce(applyFilters, 300);
-dom.searchInput.addEventListener('input', debouncedFilter);
+dom.searchInput.addEventListener('input', () => {
+  // Toggle clear button visibility
+  dom.searchClear.classList.toggle('visible', dom.searchInput.value.length > 0);
+  debouncedFilter();
+});
+
+// Clear search button
+dom.searchClear.addEventListener('click', () => {
+  dom.searchInput.value = '';
+  dom.searchClear.classList.remove('visible');
+  applyFilters();
+});
 
 // Expand/Collapse
 dom.expandAllBtn.addEventListener('click', () => {

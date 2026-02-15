@@ -512,7 +512,7 @@ function render() {
             const hasSpecs = cpuSpecs && cpuSpecs.length > 0;
             const specId = arch.id + '-' + sku.name.replace(/[^a-zA-Z0-9]/g, '_');
             return `
-            <div class="sku-card${hasSpecs ? ' has-specs' : ''}" style="--card-order: ${i * 2};" ${hasSpecs ? `onclick="toggleCpuSpecs('${specId}')"` : ''}>
+            <div class="sku-card${hasSpecs ? ' has-specs' : ''}" style="--card-order: ${i * 2};" data-sku-tags="${sku.tags.join(',')}" data-sku-brand="${sku.brand || ''}" ${hasSpecs ? `onclick="toggleCpuSpecs('${specId}')"` : ''}>
               <div class="sku-name">${sku.name}${hasSpecs ? `<span class="sku-spec-count">${cpuSpecs.length} SKUs</span>` : ''}</div>
               <div class="sku-desc">${sku.desc}</div>
               <div class="sku-tags">
@@ -797,6 +797,56 @@ function applyFilters() {
     }
 
     group.classList.toggle('hidden', !visible);
+
+    // Filter individual SKU cards within visible groups
+    if (visible && !isGpu) {
+      const skuCards = group.querySelectorAll('.sku-card');
+      let hasVisibleSku = false;
+
+      skuCards.forEach(card => {
+        let skuVisible = true;
+        const skuTags = card.dataset.skuTags ? card.dataset.skuTags.split(',') : [];
+        const skuBrand = card.dataset.skuBrand;
+
+        // Segment filter for SKU cards
+        if (activeSegmentTags.size > 0) {
+          const hasMatchingTag = skuTags.some(tag => activeSegmentTags.has(tag));
+          if (!hasMatchingTag) skuVisible = false;
+        }
+
+        // Brand filter for SKU cards
+        if (skuVisible && activeBrandTags.size > 0) {
+          if (!activeBrandTags.has(skuBrand)) skuVisible = false;
+        }
+
+        // Search filter for SKU cards
+        if (skuVisible && searchTerm) {
+          const cardText = card.textContent.toLowerCase();
+          if (!cardText.includes(searchTerm)) skuVisible = false;
+        }
+
+        card.classList.toggle('hidden', !skuVisible);
+
+        // Also hide/show the associated spec wrapper
+        const specWrapper = card.nextElementSibling;
+        if (specWrapper && specWrapper.classList.contains('cpu-spec-wrapper')) {
+          if (!skuVisible) {
+            specWrapper.classList.remove('open');
+            specWrapper.classList.add('hidden');
+            card.classList.remove('selected');
+          } else {
+            specWrapper.classList.remove('hidden');
+          }
+        }
+
+        if (skuVisible) hasVisibleSku = true;
+      });
+
+      // Hide the entire group if no SKU cards are visible
+      if (!hasVisibleSku) {
+        group.classList.add('hidden');
+      }
+    }
   });
 
   // Hide orphan era separators

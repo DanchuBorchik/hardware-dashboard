@@ -1,0 +1,366 @@
+[
+  {
+    "era": "2025"
+  },
+  {
+    "id": "mi350",
+    "arch": "MI300 Series (CDNA 4)",
+    "color": "#ef4444",
+    "year": "2025",
+    "segment": "server",
+    "subtitle": "TSMC 3 nm · CDNA 4 · HBM3E · Up to 288 GB",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/AMD_Instinct"
+      }
+    ],
+    "skus": [],
+    "gpuSpecs": {
+      "family": "CDNA 4",
+      "desc": "Latest-generation AMD Instinct accelerators built on CDNA 4 architecture with HBM3E memory, targeting large-scale AI training and inference workloads.",
+      "models": [
+        {
+          "name": "MI355X",
+          "arch": "CDNA 4",
+          "process": "3 nm",
+          "cu": "256",
+          "mem": "288 GB",
+          "memType": "HBM3E",
+          "bw": "8000 GB/s",
+          "fp32": "157.3 TFLOPS",
+          "fp32m": "157.3 TFLOPS",
+          "pcie": "5.0",
+          "form": "OAM",
+          "tbp": "1400 W (TBP)"
+        },
+        {
+          "name": "MI350X",
+          "arch": "CDNA 4",
+          "process": "3 nm",
+          "cu": "256",
+          "mem": "288 GB",
+          "memType": "HBM3E",
+          "bw": "8000 GB/s",
+          "fp32": "144.2 TFLOPS",
+          "fp32m": "144.2 TFLOPS",
+          "pcie": "5.0",
+          "form": "OAM",
+          "tbp": "1000 W (TBP)"
+        }
+      ]
+    }
+  },
+  {
+    "era": "2023 – 2024"
+  },
+  {
+    "id": "mi300",
+    "arch": "MI300 Series (CDNA 3)",
+    "color": "#f97316",
+    "year": "2023–2024",
+    "segment": "server",
+    "subtitle": "TSMC 6 & 5 nm · CDNA 3 · HBM3 / HBM3E · Up to 256 GB",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/AMD_Instinct"
+      }
+    ],
+    "skus": [],
+    "gpuSpecs": {
+      "family": "CDNA 3",
+      "desc": "Third-generation CDNA accelerators featuring chiplet design, HBM3 memory, and the MI300A APU combining CPU + GPU on a single package.",
+      "models": [
+        {
+          "name": "MI325X",
+          "arch": "CDNA 3",
+          "process": "6 & 5 nm",
+          "cu": "304",
+          "mem": "256 GB",
+          "memType": "HBM3E",
+          "bw": "6000 GB/s",
+          "fp32": "163.4 TFLOPS",
+          "fp32m": "163.4 TFLOPS",
+          "pcie": "5.0",
+          "form": "OAM",
+          "tbp": "1000 W Peak"
+        },
+        {
+          "name": "MI300X",
+          "arch": "CDNA 3",
+          "process": "6 & 5 nm",
+          "cu": "304",
+          "mem": "192 GB",
+          "memType": "HBM3",
+          "bw": "5300 GB/s",
+          "fp32": "163.4 TFLOPS",
+          "fp32m": "163.4 TFLOPS",
+          "pcie": "5.0",
+          "form": "OAM",
+          "tbp": "750 W Peak"
+        },
+        {
+          "name": "MI300A",
+          "arch": "CDNA 3",
+          "process": "6 & 5 nm",
+          "cu": "228",
+          "mem": "128 GB",
+          "memType": "HBM3",
+          "bw": "5300 GB/s",
+          "fp32": "122.6 TFLOPS",
+          "fp32m": "122.6 TFLOPS",
+          "pcie": "5.0",
+          "form": "APU (SH5)",
+          "tbp": "550 W | 760 W Peak"
+        }
+      ]
+    }
+  },
+  {
+    "era": "2021 – 2022"
+  },
+  {
+    "id": "mi200",
+    "arch": "MI200 Series (CDNA 2)",
+    "color": "#f59e0b",
+    "year": "2021–2022",
+    "segment": "server",
+    "subtitle": "TSMC 6 nm · CDNA 2 · HBM2E · Up to 128 GB",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/AMD_Instinct"
+      }
+    ],
+    "skus": [],
+    "gpuSpecs": {
+      "family": "CDNA 2",
+      "desc": "Second-generation CDNA accelerators with multi-die design, Infinity Fabric, and HBM2E memory. The MI250X powered the Frontier exascale supercomputer.",
+      "models": [
+        {
+          "name": "MI250X",
+          "arch": "CDNA 2",
+          "process": "6 nm",
+          "cu": "220",
+          "mem": "128 GB",
+          "memType": "HBM2E",
+          "bw": "3200 GB/s",
+          "fp32": "47.9 TFLOPS",
+          "fp32m": "95.7 TFLOPS",
+          "pcie": "4.0",
+          "form": "OAM",
+          "tbp": "500 W | 560 W Peak"
+        },
+        {
+          "name": "MI250",
+          "arch": "CDNA 2",
+          "process": "6 nm",
+          "cu": "208",
+          "mem": "128 GB",
+          "memType": "HBM2E",
+          "bw": "3200 GB/s",
+          "fp32": "45.3 TFLOPS",
+          "fp32m": "90.5 TFLOPS",
+          "pcie": "4.0",
+          "form": "OAM",
+          "tbp": "500 W | 560 W Peak"
+        },
+        {
+          "name": "MI210",
+          "arch": "CDNA 2",
+          "process": "6 nm",
+          "cu": "104",
+          "mem": "64 GB",
+          "memType": "HBM2E",
+          "bw": "1600 GB/s",
+          "fp32": "22.6 TFLOPS",
+          "fp32m": "45.3 TFLOPS",
+          "pcie": "4.0",
+          "form": "PCIe",
+          "tbp": "300 W"
+        }
+      ]
+    }
+  },
+  {
+    "era": "2020"
+  },
+  {
+    "id": "mi100",
+    "arch": "MI100 (CDNA)",
+    "color": "#84cc16",
+    "year": "2020",
+    "segment": "server",
+    "subtitle": "TSMC 7 nm · CDNA 1 · HBM2 · 32 GB",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/AMD_Instinct"
+      }
+    ],
+    "skus": [],
+    "gpuSpecs": {
+      "family": "CDNA",
+      "desc": "First-generation CDNA accelerators optimized for HPC and AI workloads, featuring HBM2 memory and PCIe 4.0 interface.",
+      "models": [
+        {
+          "name": "MI100",
+          "arch": "CDNA",
+          "process": "7 nm",
+          "cu": "120",
+          "mem": "32 GB",
+          "memType": "HBM2",
+          "bw": "1200 GB/s",
+          "fp32": "11.5 TFLOPS",
+          "fp32m": "23.1 TFLOPS",
+          "pcie": "4.0",
+          "form": "PCIe",
+          "tbp": "300 W"
+        }
+      ]
+    }
+  },
+  {
+    "era": "2018 – 2020"
+  },
+  {
+    "id": "mi50",
+    "arch": "MI50/MI60 (Vega 7nm)",
+    "color": "#14b8a6",
+    "year": "2018–2020",
+    "segment": "server",
+    "subtitle": "TSMC 7 nm · Vega · HBM2 · Up to 32 GB",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/AMD_Instinct"
+      }
+    ],
+    "skus": [],
+    "gpuSpecs": {
+      "family": "Vega 7nm",
+      "desc": "Second-generation Instinct accelerators featuring 7nm process technology and HBM2 memory for HPC workloads.",
+      "models": [
+        {
+          "name": "MI60",
+          "arch": "Vega 7nm",
+          "process": "7 nm",
+          "cu": "64",
+          "mem": "32 GB",
+          "memType": "HBM2",
+          "bw": "1000 GB/s",
+          "fp32": "7.4 TFLOPS",
+          "fp32m": "14.7 TFLOPS",
+          "pcie": "4.0",
+          "form": "PCIe",
+          "tbp": "300 W"
+        },
+        {
+          "name": "MI50",
+          "arch": "Vega 7nm",
+          "process": "7 nm",
+          "cu": "60",
+          "mem": "16 GB",
+          "memType": "HBM2",
+          "bw": "1000 GB/s",
+          "fp32": "6.7 TFLOPS",
+          "fp32m": "13.3 TFLOPS",
+          "pcie": "4.0",
+          "form": "PCIe",
+          "tbp": "300 W"
+        }
+      ]
+    }
+  },
+  {
+    "era": "2017"
+  },
+  {
+    "id": "mi25",
+    "arch": "MI25 (Vega 14nm)",
+    "color": "#818cf8",
+    "year": "2017",
+    "segment": "server",
+    "subtitle": "GF 14 nm · Vega · HBM2 · 16 GB",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/AMD_Instinct"
+      }
+    ],
+    "skus": [],
+    "gpuSpecs": {
+      "family": "Vega 14nm",
+      "desc": "First-generation Vega-based Instinct accelerators for deep learning and HPC applications.",
+      "models": [
+        {
+          "name": "MI25",
+          "arch": "Vega 14nm",
+          "process": "14 nm",
+          "cu": "64",
+          "mem": "16 GB",
+          "memType": "HBM2",
+          "bw": "484 GB/s",
+          "fp32": "8.2 TFLOPS",
+          "fp32m": "12.3 TFLOPS",
+          "pcie": "3.0",
+          "form": "PCIe",
+          "tbp": "300 W"
+        }
+      ]
+    }
+  },
+  {
+    "era": "2016"
+  },
+  {
+    "id": "mi8",
+    "arch": "MI8/MI6 (Fiji/Polaris)",
+    "color": "#c084fc",
+    "year": "2016",
+    "segment": "server",
+    "subtitle": "GF 28 nm / 14 nm · Fiji / Polaris · HBM / GDDR5",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/AMD_Instinct"
+      }
+    ],
+    "skus": [],
+    "gpuSpecs": {
+      "family": "Fiji/Polaris",
+      "desc": "First AMD Instinct accelerators based on Fiji and Polaris architectures for machine learning inference.",
+      "models": [
+        {
+          "name": "MI8",
+          "arch": "Fiji",
+          "process": "28 nm",
+          "cu": "64",
+          "mem": "4 GB",
+          "memType": "HBM",
+          "bw": "512 GB/s",
+          "fp32": "8.2 TFLOPS",
+          "fp32m": "8.2 TFLOPS",
+          "pcie": "3.0",
+          "form": "PCIe",
+          "tbp": "175 W"
+        },
+        {
+          "name": "MI6",
+          "arch": "Polaris",
+          "process": "14 nm",
+          "cu": "36",
+          "mem": "16 GB",
+          "memType": "GDDR5",
+          "bw": "224 GB/s",
+          "fp32": "5.7 TFLOPS",
+          "fp32m": "5.7 TFLOPS",
+          "pcie": "3.0",
+          "form": "PCIe",
+          "tbp": "150 W"
+        }
+      ]
+    }
+  }
+]

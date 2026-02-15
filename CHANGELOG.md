@@ -6,13 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Performance Improvements Planned
-- [ ] Task #6: Extract data to JSON (P1 - 1 day)
 - [ ] Task #7: Virtual scrolling (P2 - 2-3 days)
 
 ## [0.3.0] - 2026-02-14
 
 ### Performance Improvements Completed
 - [x] Task #5: CSS-based filtering - **95% performance improvement on filtering operations**
+- [x] Task #6: Extract data to JSON files - **-1MB initial JavaScript, lazy loading enabled**
 
 ### Changed
 - Replaced DOM re-rendering with CSS-based filtering for search, segment, and brand filters
@@ -29,6 +29,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `data-search-text`: Searchable text content
   - `data-gpu-segment`: GPU segment type (consumer/workstation/accelerator)
 - Debounced search now calls `applyFilters()` instead of `render()`
+- Dynamic data loading system with caching (`loadVendorData()` function)
+- Three JSON data files in `js/data/` directory:
+  - `intel-data.json` (11KB) - Intel CPU architectures
+  - `amd-data.json` (12KB) - AMD CPU architectures
+  - `amd-gpu-data.json` (9.1KB) - AMD GPU accelerators
+- Loading indicators during data fetch
+- Error handling for failed data loads
 
 ### Technical Details
 - **css/styles.css line 14**: Added `.hidden` utility class for CSS-based filtering

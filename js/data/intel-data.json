@@ -1,0 +1,481 @@
+[
+  {
+    "era": "2026"
+  },
+  {
+    "id": "nova",
+    "arch": "Nova Lake",
+    "color": "#4ade80",
+    "year": "2026",
+    "segment": "client",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Nova_Lake_(microprocessor)"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Nova Lake",
+        "desc": "Next-gen mobile & desktop processors",
+        "tags": [
+          "mobile",
+          "desktop"
+        ],
+        "brand": "Core Ultra"
+      }
+    ]
+  },
+  {
+    "id": "panther",
+    "arch": "Panther Lake",
+    "color": "#fbbf24",
+    "year": "2026",
+    "segment": "client",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Panther_Lake_(microprocessor)"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Panther Lake High Power",
+        "desc": "Mobile CPU — higher power envelope for performance laptops",
+        "tags": [
+          "mobile"
+        ],
+        "brand": "Core Ultra"
+      },
+      {
+        "name": "Panther Lake",
+        "desc": "Mobile — standard power mobile processors",
+        "tags": [
+          "mobile"
+        ],
+        "brand": "Core Ultra"
+      }
+    ]
+  },
+  {
+    "era": "2025 – 2026"
+  },
+  {
+    "id": "diamond",
+    "arch": "Diamond Rapids",
+    "color": "#f97316",
+    "year": "2025–2026",
+    "segment": "server",
+    "defaultLinks": [],
+    "skus": [
+      {
+        "name": "Diamond Rapids",
+        "desc": "Next-gen Xeon server processors — successor to Granite Rapids",
+        "tags": [
+          "server"
+        ],
+        "brand": "Xeon"
+      },
+      {
+        "name": "Diamond Rapids HBM",
+        "desc": "High-bandwidth memory variant for AI/HPC workloads",
+        "tags": [
+          "server"
+        ],
+        "brand": "Xeon"
+      }
+    ]
+  },
+  {
+    "era": "2024 – 2025"
+  },
+  {
+    "id": "arrow",
+    "arch": "Arrow Lake",
+    "color": "#f472b6",
+    "year": "2024–2025",
+    "segment": "client",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Arrow_Lake_(microprocessor)"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Arrow Lake-S",
+        "desc": "Desktop processors (2024)",
+        "tags": [
+          "desktop"
+        ],
+        "brand": "Core Ultra"
+      },
+      {
+        "name": "Arrow Lake-HX",
+        "desc": "High-end mobile — desktop-class performance in mobile (2025)",
+        "tags": [
+          "mobile"
+        ],
+        "brand": "Core Ultra"
+      },
+      {
+        "name": "Arrow Lake-H",
+        "desc": "Mobile — mainstream high-performance laptops (2025)",
+        "tags": [
+          "mobile"
+        ],
+        "brand": "Core Ultra"
+      },
+      {
+        "name": "Arrow Lake-U",
+        "desc": "Mobile — ultrabook / thin-and-light (2025)",
+        "tags": [
+          "mobile"
+        ],
+        "brand": "Core Ultra"
+      }
+    ]
+  },
+  {
+    "id": "granite",
+    "arch": "Granite Rapids",
+    "color": "#ef4444",
+    "year": "2024–2025",
+    "segment": "server",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Granite_Rapids"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Granite Rapids SP",
+        "desc": "Xeon 6 P-Core — high-performance for compute-intensive workloads",
+        "tags": [
+          "server"
+        ],
+        "brand": "Xeon 6 P"
+      },
+      {
+        "name": "Granite Rapids D",
+        "desc": "Xeon 6 P-Core — network/edge optimized",
+        "tags": [
+          "server",
+          "embedded"
+        ],
+        "brand": "Xeon 6 P"
+      },
+      {
+        "name": "Granite Rapids AP",
+        "desc": "Xeon 6 P-Core — advanced performance for large-scale deployments",
+        "tags": [
+          "server"
+        ],
+        "brand": "Xeon 6 P"
+      }
+    ]
+  },
+  {
+    "id": "sierra",
+    "arch": "Sierra Forest",
+    "color": "#14b8a6",
+    "year": "2024–2025",
+    "segment": "server",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Sierra_Forest"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Sierra Forest SP",
+        "desc": "Xeon 6 E-Core — high density, power-efficient server processors",
+        "tags": [
+          "server"
+        ],
+        "brand": "Xeon 6 E"
+      },
+      {
+        "name": "Sierra Forest AP",
+        "desc": "Xeon 6 E-Core — max core count for cloud-native & scale-out",
+        "tags": [
+          "server"
+        ],
+        "brand": "Xeon 6 E"
+      }
+    ]
+  },
+  {
+    "era": "2024"
+  },
+  {
+    "id": "lunar",
+    "arch": "Lunar Lake",
+    "color": "#818cf8",
+    "year": "2024",
+    "segment": "client",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Lunar_Lake"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Lunar Lake",
+        "desc": "Mobile CPUs — AI PC-focused ultra-efficient mobile processors",
+        "tags": [
+          "mobile"
+        ],
+        "brand": "Core Ultra"
+      }
+    ]
+  },
+  {
+    "era": "2023 – 2025"
+  },
+  {
+    "id": "emerald",
+    "arch": "Emerald Rapids",
+    "color": "#84cc16",
+    "year": "2023–2025",
+    "segment": "server",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Emerald_Rapids"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Emerald Rapids SP",
+        "desc": "5th Gen Xeon Scalable — drop-in upgrade for Sapphire Rapids",
+        "tags": [
+          "server"
+        ],
+        "brand": "Xeon"
+      },
+      {
+        "name": "Emerald Rapids MCC",
+        "desc": "5th Gen Xeon — medium core count for mainstream workloads",
+        "tags": [
+          "server"
+        ],
+        "brand": "Xeon"
+      },
+      {
+        "name": "Emerald Rapids XCC",
+        "desc": "5th Gen Xeon — extreme core count for HPC & large-scale",
+        "tags": [
+          "server"
+        ],
+        "brand": "Xeon"
+      }
+    ]
+  },
+  {
+    "era": "2023 – 2024"
+  },
+  {
+    "id": "meteor",
+    "arch": "Meteor Lake",
+    "color": "#c084fc",
+    "year": "2023–2024",
+    "segment": "client",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Meteor_Lake"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Meteor Lake-H",
+        "desc": "Mobile high-end — first Core Ultra generation (2023)",
+        "tags": [
+          "mobile"
+        ],
+        "brand": "Core Ultra"
+      },
+      {
+        "name": "Meteor Lake-U",
+        "desc": "Mobile — ultrabook tier (2023)",
+        "tags": [
+          "mobile"
+        ],
+        "brand": "Core Ultra"
+      },
+      {
+        "name": "Meteor Lake-PS",
+        "desc": "Embedded for IoT applications (2024)",
+        "tags": [
+          "embedded"
+        ],
+        "brand": "Core Ultra"
+      }
+    ]
+  },
+  {
+    "id": "sapphire",
+    "arch": "Sapphire Rapids",
+    "color": "#06b6d4",
+    "year": "2023–2024",
+    "segment": "server",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Sapphire_Rapids"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Sapphire Rapids SP",
+        "desc": "4th Gen Xeon Scalable — first with built-in accelerators (AMX, DSA, IAA, QAT)",
+        "tags": [
+          "server"
+        ],
+        "brand": "Xeon"
+      },
+      {
+        "name": "Sapphire Rapids HBM",
+        "desc": "4th Gen Xeon — high-bandwidth memory for AI & HPC",
+        "tags": [
+          "server"
+        ],
+        "brand": "Xeon"
+      },
+      {
+        "name": "Sapphire Rapids WS",
+        "desc": "4th Gen Xeon W — workstation processors",
+        "tags": [
+          "server",
+          "desktop"
+        ],
+        "brand": "Xeon"
+      }
+    ]
+  },
+  {
+    "id": "raptor14",
+    "arch": "Raptor Lake (14th Gen)",
+    "color": "#60a5fa",
+    "year": "2023–2024",
+    "segment": "client",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Raptor_Lake"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Raptor Lake-S Refresh",
+        "desc": "Desktop processors — refreshed 14th Gen",
+        "tags": [
+          "desktop"
+        ],
+        "brand": "Core"
+      },
+      {
+        "name": "Raptor Lake-U Refresh",
+        "desc": "Mobile Series — Core branding (2024)",
+        "tags": [
+          "mobile"
+        ],
+        "brand": "Core"
+      },
+      {
+        "name": "Raptor Lake-E",
+        "desc": "Embedded CPUs",
+        "tags": [
+          "embedded"
+        ],
+        "brand": "Core"
+      },
+      {
+        "name": "Raptor Lake-HX (14th)",
+        "desc": "Desktop CPUs repurposed for mobile processors",
+        "tags": [
+          "mobile"
+        ],
+        "brand": "Core"
+      },
+      {
+        "name": "Xeon E",
+        "desc": "Low-end server processors",
+        "tags": [
+          "server"
+        ],
+        "brand": "Xeon"
+      }
+    ]
+  },
+  {
+    "era": "2022 – 2023"
+  },
+  {
+    "id": "raptor13",
+    "arch": "Raptor Lake (13th Gen)",
+    "color": "#22d3ee",
+    "year": "2022–2023",
+    "segment": "client",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Raptor_Lake"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Raptor Lake-S",
+        "desc": "Desktop processors",
+        "tags": [
+          "desktop"
+        ],
+        "brand": "Core"
+      },
+      {
+        "name": "Raptor Lake-HX",
+        "desc": "Desktop CPUs repurposed for mobile processors",
+        "tags": [
+          "mobile"
+        ],
+        "brand": "Core"
+      },
+      {
+        "name": "Raptor Lake-H",
+        "desc": "Mobile processors — high performance",
+        "tags": [
+          "mobile"
+        ],
+        "brand": "Core"
+      },
+      {
+        "name": "Raptor Lake-PX",
+        "desc": "Mobile workstation tier",
+        "tags": [
+          "mobile"
+        ],
+        "brand": "Core"
+      },
+      {
+        "name": "Raptor Lake-P",
+        "desc": "Mobile mainstream",
+        "tags": [
+          "mobile"
+        ],
+        "brand": "Core"
+      },
+      {
+        "name": "Raptor Lake-U",
+        "desc": "Mobile ultrabook / low power",
+        "tags": [
+          "mobile"
+        ],
+        "brand": "Core"
+      }
+    ]
+  }
+]

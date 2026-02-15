@@ -1,0 +1,495 @@
+[
+  {
+    "era": "2024"
+  },
+  {
+    "id": "zen5",
+    "arch": "Zen 5",
+    "color": "#ef4444",
+    "year": "2024",
+    "segment": "client",
+    "subtitle": "TSMC 4 nm / 3 nm · Ryzen 9000 · Ryzen AI 300/400 · AI Max 300 · EPYC 9005",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Zen_5"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Turin",
+        "desc": "EPYC 9005 series — server processors",
+        "tags": [
+          "server"
+        ],
+        "brand": "Epyc"
+      },
+      {
+        "name": "Turin Dense",
+        "desc": "EPYC server — Zen 5c high-density cores",
+        "tags": [
+          "server"
+        ],
+        "brand": "Epyc"
+      },
+      {
+        "name": "Shimada Peak",
+        "desc": "Ryzen Threadripper 9000 series — HEDT desktop & Threadripper PRO 9000 WX workstation",
+        "tags": [
+          "desktop",
+          "pro"
+        ],
+        "brand": "Threadripper"
+      },
+      {
+        "name": "Granite Ridge",
+        "desc": "Ryzen 9000 series — desktop processors",
+        "tags": [
+          "desktop",
+          "pro"
+        ],
+        "brand": "Ryzen"
+      },
+      {
+        "name": "Fire Range",
+        "desc": "Ryzen 9000 HX series — high-performance mobile processors",
+        "tags": [
+          "laptop"
+        ],
+        "brand": "Ryzen"
+      },
+      {
+        "name": "Strix Halo",
+        "desc": "Ryzen AI Max 300 series — high-performance laptop APU with integrated RDNA 3.5 GPU & up to 128 GB unified memory",
+        "tags": [
+          "laptop",
+          "pro"
+        ],
+        "brand": "Ryzen AI"
+      },
+      {
+        "name": "Strix Point",
+        "desc": "Ryzen AI 300 series — laptop APUs with XDNA 2 NPU",
+        "tags": [
+          "laptop",
+          "pro"
+        ],
+        "brand": "Ryzen AI"
+      },
+      {
+        "name": "Gorgon Point",
+        "desc": "Ryzen AI 400 series — next-gen laptop APUs with XDNA 2 NPU (Strix Point refresh)",
+        "tags": [
+          "laptop",
+          "pro"
+        ],
+        "brand": "Ryzen AI"
+      },
+      {
+        "name": "Z2",
+        "desc": "Ryzen Z2 series — handheld gaming processors (inc. AI Z2 Extreme)",
+        "tags": [
+          "handheld"
+        ],
+        "brand": "Ryzen"
+      }
+    ]
+  },
+  {
+    "era": "2022 – 2023"
+  },
+  {
+    "id": "zen4",
+    "arch": "Zen 4",
+    "color": "#f97316",
+    "year": "2022–2023",
+    "segment": "client",
+    "subtitle": "TSMC 5 nm · Ryzen 7000/8000 · Threadripper 7000 · EPYC 9004",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Zen_4"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Genoa",
+        "desc": "EPYC 9004 series — server processors",
+        "tags": [
+          "server"
+        ],
+        "brand": "Epyc"
+      },
+      {
+        "name": "Genoa-X",
+        "desc": "EPYC 9004X series — 3D V-Cache server processors",
+        "tags": [
+          "server"
+        ],
+        "brand": "Epyc"
+      },
+      {
+        "name": "Bergamo",
+        "desc": "EPYC 9704 series — Zen 4c cloud-native server",
+        "tags": [
+          "server"
+        ],
+        "brand": "Epyc"
+      },
+      {
+        "name": "Siena",
+        "desc": "EPYC 8004 series — Zen 4c edge/telco server",
+        "tags": [
+          "server"
+        ],
+        "brand": "Epyc"
+      },
+      {
+        "name": "Storm Peak",
+        "desc": "Ryzen Threadripper 7000 series — HEDT desktop & Threadripper PRO 7000 WX workstation",
+        "tags": [
+          "desktop",
+          "pro"
+        ],
+        "brand": "Threadripper"
+      },
+      {
+        "name": "Raphael",
+        "desc": "Ryzen 7000 series — desktop processors",
+        "tags": [
+          "desktop"
+        ],
+        "brand": "Ryzen"
+      },
+      {
+        "name": "Dragon Range",
+        "desc": "Ryzen 7045 series — high-performance laptop",
+        "tags": [
+          "laptop"
+        ],
+        "brand": "Ryzen"
+      },
+      {
+        "name": "Phoenix",
+        "desc": "Ryzen 8000 APU (desktop) & Ryzen 7040 series (laptop)",
+        "tags": [
+          "desktop",
+          "laptop",
+          "pro"
+        ],
+        "brand": "Ryzen"
+      },
+      {
+        "name": "Hawk Point",
+        "desc": "Ryzen 8040/8045 series — refreshed Phoenix (laptop)",
+        "tags": [
+          "laptop",
+          "pro"
+        ],
+        "brand": "Ryzen"
+      },
+      {
+        "name": "Hawk Point Refresh",
+        "desc": "Ryzen 200 series — refreshed Hawk Point with simplified branding (laptop)",
+        "tags": [
+          "laptop",
+          "pro"
+        ],
+        "brand": "Ryzen"
+      },
+      {
+        "name": "Z1",
+        "desc": "Ryzen Z1 series — handheld gaming processors (Phoenix silicon)",
+        "tags": [
+          "handheld"
+        ],
+        "brand": "Ryzen"
+      }
+    ]
+  },
+  {
+    "era": "2022"
+  },
+  {
+    "id": "zen3plus",
+    "arch": "Zen 3+",
+    "color": "#f59e0b",
+    "year": "2022",
+    "segment": "client",
+    "subtitle": "TSMC 6 nm · Ryzen 6000 (Rembrandt) · RDNA 2 iGPU",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Zen_3"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Rembrandt",
+        "desc": "Ryzen 6000 series — laptop APUs with RDNA 2 graphics",
+        "tags": [
+          "laptop"
+        ],
+        "brand": "Ryzen"
+      },
+      {
+        "name": "Rembrandt-R",
+        "desc": "Ryzen 7035 series — refreshed Rembrandt (laptop)",
+        "tags": [
+          "laptop"
+        ],
+        "brand": "Ryzen"
+      }
+    ]
+  },
+  {
+    "era": "2020 – 2022"
+  },
+  {
+    "id": "zen3",
+    "arch": "Zen 3",
+    "color": "#84cc16",
+    "year": "2020–2022",
+    "segment": "client",
+    "subtitle": "TSMC 7 nm · Ryzen 5000 · Threadripper 5000 · EPYC 7003",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Zen_3"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Milan",
+        "desc": "EPYC 7003 series — server processors",
+        "tags": [
+          "server"
+        ],
+        "brand": "Epyc"
+      },
+      {
+        "name": "Milan-X",
+        "desc": "EPYC 7003X series — 3D V-Cache server processors",
+        "tags": [
+          "server"
+        ],
+        "brand": "Epyc"
+      },
+      {
+        "name": "Chagall",
+        "desc": "Ryzen Threadripper 5000 series — HEDT desktop & Threadripper PRO 5000 WX workstation",
+        "tags": [
+          "desktop",
+          "pro"
+        ],
+        "brand": "Threadripper"
+      },
+      {
+        "name": "Vermeer",
+        "desc": "Ryzen 5000 series — desktop processors",
+        "tags": [
+          "desktop"
+        ],
+        "brand": "Ryzen"
+      },
+      {
+        "name": "Cezanne",
+        "desc": "Ryzen 5000 series — APUs (desktop & laptop)",
+        "tags": [
+          "desktop",
+          "laptop"
+        ],
+        "brand": "Ryzen"
+      },
+      {
+        "name": "Barceló",
+        "desc": "Ryzen 5000 series — laptop refresh",
+        "tags": [
+          "laptop"
+        ],
+        "brand": "Ryzen"
+      },
+      {
+        "name": "Barceló-R",
+        "desc": "Ryzen 7030 series — laptop",
+        "tags": [
+          "laptop"
+        ],
+        "brand": "Ryzen"
+      }
+    ]
+  },
+  {
+    "era": "2019 – 2021"
+  },
+  {
+    "id": "zen2",
+    "arch": "Zen 2",
+    "color": "#14b8a6",
+    "year": "2019–2021",
+    "segment": "client",
+    "subtitle": "TSMC 7 nm · Ryzen 3000 / 4000 · Threadripper 3000 · EPYC 7002",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Zen_2"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Rome",
+        "desc": "EPYC 7002 series — server processors",
+        "tags": [
+          "server"
+        ],
+        "brand": "Epyc"
+      },
+      {
+        "name": "Castle Peak",
+        "desc": "Ryzen Threadripper 3000 series — HEDT desktop & Threadripper PRO 3000 WX workstation",
+        "tags": [
+          "desktop",
+          "pro"
+        ],
+        "brand": "Threadripper"
+      },
+      {
+        "name": "Matisse",
+        "desc": "Ryzen 3000 series — desktop processors",
+        "tags": [
+          "desktop"
+        ],
+        "brand": "Ryzen"
+      },
+      {
+        "name": "Renoir",
+        "desc": "Ryzen 4000 APU series with RX Vega (desktop & laptop)",
+        "tags": [
+          "desktop",
+          "laptop"
+        ],
+        "brand": "Ryzen"
+      },
+      {
+        "name": "Lucienne",
+        "desc": "Ryzen 5000 APU series — laptop",
+        "tags": [
+          "laptop"
+        ],
+        "brand": "Ryzen"
+      },
+      {
+        "name": "Mendocino",
+        "desc": "Ryzen 7020 / Athlon 7020 APU series — budget laptop",
+        "tags": [
+          "laptop"
+        ],
+        "brand": "Ryzen"
+      }
+    ]
+  },
+  {
+    "era": "2018 – 2019"
+  },
+  {
+    "id": "zenplus",
+    "arch": "Zen+",
+    "color": "#818cf8",
+    "year": "2018–2019",
+    "segment": "client",
+    "subtitle": "GF 12 nm · Ryzen 2000 / 3000 APU · Threadripper 2000",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Zen%2B"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Colfax",
+        "desc": "Ryzen Threadripper 2000 series — HEDT desktop",
+        "tags": [
+          "desktop"
+        ],
+        "brand": "Threadripper"
+      },
+      {
+        "name": "Pinnacle Ridge",
+        "desc": "Ryzen 2000 series — desktop processors",
+        "tags": [
+          "desktop"
+        ],
+        "brand": "Ryzen"
+      },
+      {
+        "name": "Picasso",
+        "desc": "Ryzen 3000 / Athlon APU series with RX Vega (desktop & laptop)",
+        "tags": [
+          "desktop",
+          "laptop"
+        ],
+        "brand": "Ryzen"
+      }
+    ]
+  },
+  {
+    "era": "2017 – 2018"
+  },
+  {
+    "id": "zen1",
+    "arch": "Zen",
+    "color": "#c084fc",
+    "year": "2017–2018",
+    "segment": "client",
+    "subtitle": "GF 14 nm · Ryzen 1000 / 2000 APU · Threadripper 1000 · EPYC 7001",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Zen_(first_generation)"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Naples",
+        "desc": "EPYC 7001 series — server processors",
+        "tags": [
+          "server"
+        ],
+        "brand": "Epyc"
+      },
+      {
+        "name": "Whitehaven",
+        "desc": "Ryzen Threadripper 1000 series — HEDT desktop",
+        "tags": [
+          "desktop"
+        ],
+        "brand": "Threadripper"
+      },
+      {
+        "name": "Summit Ridge",
+        "desc": "Ryzen 1000 series — desktop processors",
+        "tags": [
+          "desktop"
+        ],
+        "brand": "Ryzen"
+      },
+      {
+        "name": "Raven Ridge",
+        "desc": "Ryzen 2000 / Athlon APU series with RX Vega (desktop & laptop)",
+        "tags": [
+          "desktop",
+          "laptop"
+        ],
+        "brand": "Ryzen"
+      },
+      {
+        "name": "Dalí",
+        "desc": "Ryzen 3000 / Athlon APU series — budget laptop",
+        "tags": [
+          "laptop"
+        ],
+        "brand": "Ryzen"
+      }
+    ]
+  }
+]

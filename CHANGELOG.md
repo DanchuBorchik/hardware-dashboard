@@ -14,6 +14,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Constrained .skus-grid, .sku-card, and .cpu-spec-wrapper to 100% width with box-sizing
 
 ### Added
+- CPU comparison features (2026-02-15):
+  - Search highlighting: CPU model names in spec tables highlight yellow when searched
+  - Manual row selection: Click any CPU spec table row to highlight green for comparison
+  - Multi-select: Shift+click to select multiple rows for side-by-side comparison
+  - "Clear Selections" button in toolbar to remove all green highlights
+  - Click outside tables (on timeline/background) to clear selections
+  - Yellow (search) and green (selected) highlights work together for easy comparison
+  - Works across all vendor tabs (AMD CPU, Intel CPU, AMD GPU)
+  - Search now finds CPU model names (e.g., "9575F", "EPYC 9575F") in addition to architecture names
 - Mobile-responsive design improvements:
   - Touch-friendly tap targets (44x44px minimum) for all interactive elements
   - Horizontal scrolling for spec tables with -webkit-overflow-scrolling: touch

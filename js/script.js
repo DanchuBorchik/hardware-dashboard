@@ -159,7 +159,8 @@ function initDomCache() {
     techTabCpu: document.getElementById('techTabCpu'),
     techTabGpu: document.getElementById('techTabGpu'),
     expandAllBtn: document.getElementById('expandAllBtn'),
-    collapseAllBtn: document.getElementById('collapseAllBtn')
+    collapseAllBtn: document.getElementById('collapseAllBtn'),
+    clearSelectionsBtn: document.getElementById('clearSelectionsBtn')
   };
 }
 
@@ -791,8 +792,27 @@ function applyFilters() {
       }
 
       // Search filter
-      if (visible && searchTerm && !searchText.includes(searchTerm)) {
-        visible = false;
+      if (visible && searchTerm) {
+        // First check pre-built searchText
+        let found = searchText.includes(searchTerm);
+
+        // If not found and AMD_CPU_SPECS is loaded, also search within spec table data
+        if (!found && currentVendor === 'amd' && AMD_CPU_SPECS) {
+          // Get all SKU names for this architecture
+          const skuCards = group.querySelectorAll('.sku-card');
+          for (const skuCard of skuCards) {
+            const skuName = skuCard.querySelector('.sku-name')?.textContent?.split(/\d+\sSKUs/)[0].trim();
+            if (skuName && AMD_CPU_SPECS[skuName]) {
+              const cpuModels = AMD_CPU_SPECS[skuName];
+              if (cpuModels.some(m => m.n.toLowerCase().includes(searchTerm))) {
+                found = true;
+                break;
+              }
+            }
+          }
+        }
+
+        if (!found) visible = false;
       }
     }
 
@@ -822,7 +842,18 @@ function applyFilters() {
         // Search filter for SKU cards
         if (skuVisible && searchTerm) {
           const cardText = card.textContent.toLowerCase();
-          if (!cardText.includes(searchTerm)) skuVisible = false;
+          let found = cardText.includes(searchTerm);
+
+          // If not found, also check CPU spec table data
+          if (!found && currentVendor === 'amd' && AMD_CPU_SPECS) {
+            const skuName = card.querySelector('.sku-name')?.textContent?.split(/\d+\sSKUs/)[0].trim();
+            if (skuName && AMD_CPU_SPECS[skuName]) {
+              const cpuModels = AMD_CPU_SPECS[skuName];
+              found = cpuModels.some(m => m.n.toLowerCase().includes(searchTerm));
+            }
+          }
+
+          if (!found) skuVisible = false;
         }
 
         card.classList.toggle('hidden', !skuVisible);
@@ -867,7 +898,80 @@ function applyFilters() {
     }
   }
 
+  // Highlight matching rows in CPU spec tables
+  highlightSearchMatches(searchTerm);
+
   perfEnd('applyFilters');
+}
+
+// Highlight CPU spec table rows that match the search term
+function highlightSearchMatches(searchTerm) {
+  // Clear all existing search highlights (but preserve manual selections)
+  document.querySelectorAll('.cpu-spec-table tbody tr').forEach(row => {
+    row.classList.remove('search-match');
+  });
+
+  // If no search term, we're done
+  if (!searchTerm) return;
+
+  // Highlight matching rows in CPU spec tables (works for all vendors)
+  if ((currentVendor === 'amd' && AMD_CPU_SPECS) || currentVendor === 'intel') {
+    document.querySelectorAll('.cpu-spec-table tbody tr').forEach(row => {
+      const modelNameCell = row.querySelector('.cpu-model-name');
+      if (modelNameCell) {
+        const modelName = modelNameCell.textContent.toLowerCase();
+        if (modelName.includes(searchTerm)) {
+          // Only add yellow highlight if not manually selected (green)
+          if (!row.classList.contains('row-selected')) {
+            row.classList.add('search-match');
+          }
+        }
+      }
+    });
+  }
+}
+
+// Handle row selection in CPU spec tables
+function setupRowSelectionHandlers() {
+  // Use event delegation on document for dynamically added tables
+  document.addEventListener('click', (e) => {
+    const row = e.target.closest('.cpu-spec-table tbody tr');
+
+    // If click is outside table AND on safe areas (timeline/container), clear selections
+    if (!row && !e.target.closest('.cpu-spec-table')) {
+      // Only clear if clicking on container or timeline (not buttons/controls)
+      const clickedOnSafeArea = e.target.matches('.container, .timeline, .arch-group, .bg-grid') ||
+                                 e.target.closest('.timeline, .arch-group');
+      if (clickedOnSafeArea) {
+        clearAllSelections();
+      }
+      return;
+    }
+
+    if (!row) return;
+
+    // Toggle selection on click
+    if (e.shiftKey) {
+      // Shift+click: add to selection without deselecting others
+      row.classList.add('row-selected');
+      row.classList.remove('search-match'); // Remove yellow if present
+    } else {
+      // Normal click: toggle this row
+      if (row.classList.contains('row-selected')) {
+        row.classList.remove('row-selected');
+      } else {
+        row.classList.add('row-selected');
+        row.classList.remove('search-match'); // Remove yellow if present
+      }
+    }
+  });
+}
+
+// Clear all row selections
+function clearAllSelections() {
+  document.querySelectorAll('.cpu-spec-table tbody tr.row-selected').forEach(row => {
+    row.classList.remove('row-selected');
+  });
 }
 
 // ════════════════════════════════════════
@@ -990,6 +1094,7 @@ function removeLink(id, idx) {
 
 // Init DOM cache and event listeners
 initDomCache();
+setupRowSelectionHandlers();
 
 // Search (with debouncing for performance)
 const debouncedFilter = debounce(applyFilters, 300);
@@ -1002,6 +1107,7 @@ dom.expandAllBtn.addEventListener('click', () => {
   data.forEach(a => { if (a.id) expandedGroups.add(a.id); }); render();
 });
 dom.collapseAllBtn.addEventListener('click', () => { expandedGroups.clear(); render(); });
+dom.clearSelectionsBtn.addEventListener('click', clearAllSelections);
 
 // Init - Load AMD data on startup
 switchVendor('amd').catch(error => {

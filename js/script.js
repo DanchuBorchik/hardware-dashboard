@@ -462,7 +462,6 @@ function render() {
     const arch = entry;
 
     const isExpanded = expandedGroups.has(arch.id);
-    console.log(`Rendering arch: ${arch.arch} with ${arch.skus?.length || 0} SKUs`);
     const group = document.createElement('div');
     group.className = `arch-group${isExpanded ? ' expanded' : ''}`;
     group.style.setProperty('--arch-color', arch.color);
@@ -826,19 +825,8 @@ function applyFilters() {
 // HELPERS
 // ════════════════════════════════════════
 function toggleGroup(id) {
-  console.log('toggleGroup called with id:', id);
   expandedGroups.has(id) ? expandedGroups.delete(id) : expandedGroups.add(id);
-  const element = document.querySelector(`[data-id="${id}"]`);
-  console.log('Found element:', element);
-  if (element) {
-    element.classList.toggle('expanded');
-    console.log('Element now has expanded class:', element.classList.contains('expanded'));
-    const body = element.querySelector('.arch-body');
-    console.log('Arch-body found:', !!body);
-    console.log('Arch-body innerHTML length:', body?.innerHTML.length);
-  } else {
-    console.error('No element found with data-id:', id);
-  }
+  document.querySelector(`[data-id="${id}"]`)?.classList.toggle('expanded');
 }
 function toggleCpuSpecs(specId) {
   const wrapper = document.getElementById('cpu-spec-' + specId);

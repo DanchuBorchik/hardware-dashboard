@@ -407,6 +407,51 @@ let activeBrandTags = new Set();
 let activeGpuSegment = 'all';
 
 // ════════════════════════════════════════
+// CACHED DOM REFERENCES (Performance)
+// ════════════════════════════════════════
+let dom = null; // Will be initialized after DOM is ready
+
+function initDomCache() {
+  dom = {
+    timeline: document.getElementById('timeline'),
+    searchInput: document.getElementById('searchInput'),
+    pageHeader: document.getElementById('pageHeader'),
+    legendToggles: document.getElementById('legendToggles'),
+    filterControls: document.getElementById('filterControls'),
+    codenameTableWrap: document.getElementById('codenameTableWrap'),
+    techTabs: document.getElementById('techTabs'),
+    tabIntel: document.getElementById('tabIntel'),
+    tabAmd: document.getElementById('tabAmd'),
+    techTabCpu: document.getElementById('techTabCpu'),
+    techTabGpu: document.getElementById('techTabGpu'),
+    expandAllBtn: document.getElementById('expandAllBtn'),
+    collapseAllBtn: document.getElementById('collapseAllBtn')
+  };
+}
+
+// ════════════════════════════════════════
+// PERFORMANCE UTILITIES
+// ════════════════════════════════════════
+let searchTimeout = null;
+
+function debounce(func, delay) {
+  return function(...args) {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => func.apply(this, args), delay);
+  };
+}
+
+const PERF_LOGGING_ENABLED = true; // Set to false in production
+
+function perfStart(label) {
+  if (PERF_LOGGING_ENABLED) console.time(label);
+}
+
+function perfEnd(label) {
+  if (PERF_LOGGING_ENABLED) console.timeEnd(label);
+}
+
+// ════════════════════════════════════════
 // VENDOR SWITCHING
 // ════════════════════════════════════════
 function switchVendor(vendor) {
@@ -416,27 +461,24 @@ function switchVendor(vendor) {
   activeSegmentTags.clear();
   activeBrandTags.clear();
   activeGpuSegment = 'all';
-  document.getElementById('searchInput').value = '';
+  dom.searchInput.value = '';
 
   // Tab styling
-  const ti = document.getElementById('tabIntel');
-  const ta = document.getElementById('tabAmd');
-  ti.className = 'vendor-tab' + (vendor === 'intel' ? ' active-intel' : '');
-  ta.className = 'vendor-tab' + (vendor === 'amd' ? ' active-amd' : '');
+  dom.tabIntel.className = 'vendor-tab' + (vendor === 'intel' ? ' active-intel' : '');
+  dom.tabAmd.className = 'vendor-tab' + (vendor === 'amd' ? ' active-amd' : '');
 
   // Show/hide tech tabs
-  const techTabs = document.getElementById('techTabs');
   const cfg = VENDOR_CONFIG[vendor];
   if (cfg.gpuData) {
-    techTabs.classList.add('visible');
-    document.getElementById('techTabCpu').classList.add('active');
-    document.getElementById('techTabGpu').classList.remove('active');
+    dom.techTabs.classList.add('visible');
+    dom.techTabCpu.classList.add('active');
+    dom.techTabGpu.classList.remove('active');
   } else {
-    techTabs.classList.remove('visible');
+    dom.techTabs.classList.remove('visible');
   }
 
   // Header
-  document.getElementById('pageHeader').innerHTML = `<h1 class="${cfg.headerClass}">${cfg.title}</h1><p>Processor Architecture Generations</p>`;
+  dom.pageHeader.innerHTML = `<h1 class="${cfg.headerClass}">${cfg.title}</h1><p>Processor Architecture Generations</p>`;
 
   buildLegend();
   buildFilters();
@@ -451,20 +493,20 @@ function switchTech(tab) {
   activeSegmentTags.clear();
   activeBrandTags.clear();
   activeGpuSegment = 'all';
-  document.getElementById('searchInput').value = '';
+  dom.searchInput.value = '';
 
-  document.getElementById('techTabCpu').classList.toggle('active', tab === 'cpu');
-  document.getElementById('techTabGpu').classList.toggle('active', tab === 'gpu');
+  dom.techTabCpu.classList.toggle('active', tab === 'cpu');
+  dom.techTabGpu.classList.toggle('active', tab === 'gpu');
 
   const cfg = VENDOR_CONFIG[currentVendor];
   if (tab === 'gpu') {
-    document.getElementById('pageHeader').innerHTML = `<h1 class="${cfg.headerClass}">${cfg.gpuTitle}</h1><p>Instinct · Radeon · Radeon PRO · FirePro</p>`;
+    dom.pageHeader.innerHTML = `<h1 class="${cfg.headerClass}">${cfg.gpuTitle}</h1><p>Instinct · Radeon · Radeon PRO · FirePro</p>`;
     // Hide CPU-only UI
-    document.getElementById('legendToggles').innerHTML = '';
-    document.getElementById('codenameTableWrap').innerHTML = '';
+    dom.legendToggles.innerHTML = '';
+    dom.codenameTableWrap.innerHTML = '';
     buildGpuFilters();
   } else {
-    document.getElementById('pageHeader').innerHTML = `<h1 class="${cfg.headerClass}">${cfg.title}</h1><p>Processor Architecture Generations</p>`;
+    dom.pageHeader.innerHTML = `<h1 class="${cfg.headerClass}">${cfg.title}</h1><p>Processor Architecture Generations</p>`;
     buildLegend();
     buildFilters();
     buildCodenameTable();
@@ -474,7 +516,7 @@ function switchTech(tab) {
 
 function buildCodenameTable() {
   const cfg = VENDOR_CONFIG[currentVendor];
-  const wrap = document.getElementById('codenameTableWrap');
+  const wrap = dom.codenameTableWrap;
   if (!cfg.codenameTable) { wrap.innerHTML = ''; return; }
 
   const rows = cfg.codenameTable;
@@ -524,7 +566,7 @@ function jumpToArch(id) {
 
 function buildLegend() {
   const cfg = VENDOR_CONFIG[currentVendor];
-  const el = document.getElementById('legendToggles');
+  const el = dom.legendToggles;
   let html = '';
   cfg.segmentTags.forEach(t => {
     html += `<div class="legend-item" data-tag-type="segment" data-tag="${t.tag}" style="--tag-color:${t.color}" onclick="toggleLegendTag(this)"><div class="legend-dot" style="background:${t.color}"></div>${t.label}</div>`;
@@ -538,7 +580,7 @@ function buildLegend() {
 
 function buildFilters() {
   const cfg = VENDOR_CONFIG[currentVendor];
-  const el = document.getElementById('filterControls');
+  const el = dom.filterControls;
   el.innerHTML = cfg.filterButtons.map(f =>
     `<button class="filter-btn${f === 'all' ? ' active' : ''}" data-filter="${f}">${f.charAt(0).toUpperCase() + f.slice(1)}</button>`
   ).join('');
@@ -584,7 +626,7 @@ function toggleLegendTag(el) {
 
   if (tagType === 'segment') {
     const allSegs = VENDOR_CONFIG[currentVendor].segmentTags.map(t => t.tag);
-    const filterEl = document.getElementById('filterControls');
+    const filterEl = dom.filterControls;
     filterEl.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     if (activeSegmentTags.size === 0) {
       filterEl.querySelector('[data-filter="all"]')?.classList.add('active');
@@ -624,8 +666,10 @@ function syncLegendToggles() {
 // RENDER
 // ════════════════════════════════════════
 function render() {
-  const timeline = document.getElementById('timeline');
-  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  perfStart('render');
+
+  const timeline = dom.timeline;
+  const searchTerm = dom.searchInput.value.toLowerCase();
   const cfg = VENDOR_CONFIG[currentVendor];
   const isGpu = currentTechTab === 'gpu' && cfg.gpuData;
   const data = isGpu ? cfg.gpuData : cfg.data;
@@ -634,6 +678,7 @@ function render() {
 
   if (isGpu) {
     renderGpu(timeline, data, searchTerm);
+    perfEnd('render');
     return;
   }
 
@@ -766,6 +811,8 @@ function render() {
       if (!next || next.classList.contains('era-separator')) children[i].style.display = 'none';
     }
   }
+
+  perfEnd('render');
 }
 
 // ════════════════════════════════════════
@@ -1004,15 +1051,20 @@ function removeLink(id, idx) {
   expandedGroups.add(id); render();
 }
 
-// Search
-document.getElementById('searchInput').addEventListener('input', render);
+// Init DOM cache and event listeners
+initDomCache();
+
+// Search (with debouncing for performance)
+const debouncedRender = debounce(render, 300);
+dom.searchInput.addEventListener('input', debouncedRender);
+
 // Expand/Collapse
-document.getElementById('expandAllBtn').addEventListener('click', () => {
+dom.expandAllBtn.addEventListener('click', () => {
   const cfg = VENDOR_CONFIG[currentVendor];
   const data = (currentTechTab === 'gpu' && cfg.gpuData) ? cfg.gpuData : cfg.data;
   data.forEach(a => { if (a.id) expandedGroups.add(a.id); }); render();
 });
-document.getElementById('collapseAllBtn').addEventListener('click', () => { expandedGroups.clear(); render(); });
+dom.collapseAllBtn.addEventListener('click', () => { expandedGroups.clear(); render(); });
 
 // Init
 switchVendor('amd');

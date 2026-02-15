@@ -1,98 +1,71 @@
 // ════════════════════════════════════════
-// INTEL DATA
+// DATA LOADING (Dynamic JSON Loading)
 // ════════════════════════════════════════
-const INTEL_DATA = [
-  { era: '2026' },
-  { id: 'nova', arch: 'Nova Lake', color: '#4ade80', year: '2026', segment: 'client',
-    defaultLinks: [{ label: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/Nova_Lake_(microprocessor)' }],
-    skus: [
-      { name: 'Nova Lake', desc: 'Next-gen mobile & desktop processors', tags: ['mobile', 'desktop'], brand: 'Core Ultra' }
-    ] },
-  { id: 'panther', arch: 'Panther Lake', color: '#fbbf24', year: '2026', segment: 'client',
-    defaultLinks: [{ label: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/Panther_Lake_(microprocessor)' }],
-    skus: [
-      { name: 'Panther Lake High Power', desc: 'Mobile CPU — higher power envelope for performance laptops', tags: ['mobile'], brand: 'Core Ultra' },
-      { name: 'Panther Lake', desc: 'Mobile — standard power mobile processors', tags: ['mobile'], brand: 'Core Ultra' }
-    ] },
-  { era: '2025 – 2026' },
-  { id: 'diamond', arch: 'Diamond Rapids', color: '#f97316', year: '2025–2026', segment: 'server',
-    defaultLinks: [],
-    skus: [
-      { name: 'Diamond Rapids', desc: 'Next-gen Xeon server processors — successor to Granite Rapids', tags: ['server'], brand: 'Xeon' },
-      { name: 'Diamond Rapids HBM', desc: 'High-bandwidth memory variant for AI/HPC workloads', tags: ['server'], brand: 'Xeon' }
-    ] },
-  { era: '2024 – 2025' },
-  { id: 'arrow', arch: 'Arrow Lake', color: '#f472b6', year: '2024–2025', segment: 'client',
-    defaultLinks: [{ label: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/Arrow_Lake_(microprocessor)' }],
-    skus: [
-      { name: 'Arrow Lake-S', desc: 'Desktop processors (2024)', tags: ['desktop'], brand: 'Core Ultra' },
-      { name: 'Arrow Lake-HX', desc: 'High-end mobile — desktop-class performance in mobile (2025)', tags: ['mobile'], brand: 'Core Ultra' },
-      { name: 'Arrow Lake-H', desc: 'Mobile — mainstream high-performance laptops (2025)', tags: ['mobile'], brand: 'Core Ultra' },
-      { name: 'Arrow Lake-U', desc: 'Mobile — ultrabook / thin-and-light (2025)', tags: ['mobile'], brand: 'Core Ultra' }
-    ] },
-  { id: 'granite', arch: 'Granite Rapids', color: '#ef4444', year: '2024–2025', segment: 'server',
-    defaultLinks: [{ label: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/Granite_Rapids' }],
-    skus: [
-      { name: 'Granite Rapids SP', desc: 'Xeon 6 P-Core — high-performance for compute-intensive workloads', tags: ['server'], brand: 'Xeon 6 P' },
-      { name: 'Granite Rapids D', desc: 'Xeon 6 P-Core — network/edge optimized', tags: ['server', 'embedded'], brand: 'Xeon 6 P' },
-      { name: 'Granite Rapids AP', desc: 'Xeon 6 P-Core — advanced performance for large-scale deployments', tags: ['server'], brand: 'Xeon 6 P' }
-    ] },
-  { id: 'sierra', arch: 'Sierra Forest', color: '#14b8a6', year: '2024–2025', segment: 'server',
-    defaultLinks: [{ label: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/Sierra_Forest' }],
-    skus: [
-      { name: 'Sierra Forest SP', desc: 'Xeon 6 E-Core — high density, power-efficient server processors', tags: ['server'], brand: 'Xeon 6 E' },
-      { name: 'Sierra Forest AP', desc: 'Xeon 6 E-Core — max core count for cloud-native & scale-out', tags: ['server'], brand: 'Xeon 6 E' }
-    ] },
-  { era: '2024' },
-  { id: 'lunar', arch: 'Lunar Lake', color: '#818cf8', year: '2024', segment: 'client',
-    defaultLinks: [{ label: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/Lunar_Lake' }],
-    skus: [
-      { name: 'Lunar Lake', desc: 'Mobile CPUs — AI PC-focused ultra-efficient mobile processors', tags: ['mobile'], brand: 'Core Ultra' }
-    ] },
-  { era: '2023 – 2025' },
-  { id: 'emerald', arch: 'Emerald Rapids', color: '#84cc16', year: '2023–2025', segment: 'server',
-    defaultLinks: [{ label: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/Emerald_Rapids' }],
-    skus: [
-      { name: 'Emerald Rapids SP', desc: '5th Gen Xeon Scalable — drop-in upgrade for Sapphire Rapids', tags: ['server'], brand: 'Xeon' },
-      { name: 'Emerald Rapids MCC', desc: '5th Gen Xeon — medium core count for mainstream workloads', tags: ['server'], brand: 'Xeon' },
-      { name: 'Emerald Rapids XCC', desc: '5th Gen Xeon — extreme core count for HPC & large-scale', tags: ['server'], brand: 'Xeon' }
-    ] },
-  { era: '2023 – 2024' },
-  { id: 'meteor', arch: 'Meteor Lake', color: '#c084fc', year: '2023–2024', segment: 'client',
-    defaultLinks: [{ label: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/Meteor_Lake' }],
-    skus: [
-      { name: 'Meteor Lake-H', desc: 'Mobile high-end — first Core Ultra generation (2023)', tags: ['mobile'], brand: 'Core Ultra' },
-      { name: 'Meteor Lake-U', desc: 'Mobile — ultrabook tier (2023)', tags: ['mobile'], brand: 'Core Ultra' },
-      { name: 'Meteor Lake-PS', desc: 'Embedded for IoT applications (2024)', tags: ['embedded'], brand: 'Core Ultra' }
-    ] },
-  { id: 'sapphire', arch: 'Sapphire Rapids', color: '#06b6d4', year: '2023–2024', segment: 'server',
-    defaultLinks: [{ label: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/Sapphire_Rapids' }],
-    skus: [
-      { name: 'Sapphire Rapids SP', desc: '4th Gen Xeon Scalable — first with built-in accelerators (AMX, DSA, IAA, QAT)', tags: ['server'], brand: 'Xeon' },
-      { name: 'Sapphire Rapids HBM', desc: '4th Gen Xeon — high-bandwidth memory for AI & HPC', tags: ['server'], brand: 'Xeon' },
-      { name: 'Sapphire Rapids WS', desc: '4th Gen Xeon W — workstation processors', tags: ['server', 'desktop'], brand: 'Xeon' }
-    ] },
-  { id: 'raptor14', arch: 'Raptor Lake (14th Gen)', color: '#60a5fa', year: '2023–2024', segment: 'client',
-    defaultLinks: [{ label: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/Raptor_Lake' }],
-    skus: [
-      { name: 'Raptor Lake-S Refresh', desc: 'Desktop processors — refreshed 14th Gen', tags: ['desktop'], brand: 'Core' },
-      { name: 'Raptor Lake-U Refresh', desc: 'Mobile Series — Core branding (2024)', tags: ['mobile'], brand: 'Core' },
-      { name: 'Raptor Lake-E', desc: 'Embedded CPUs', tags: ['embedded'], brand: 'Core' },
-      { name: 'Raptor Lake-HX (14th)', desc: 'Desktop CPUs repurposed for mobile processors', tags: ['mobile'], brand: 'Core' },
-      { name: 'Xeon E', desc: 'Low-end server processors', tags: ['server'], brand: 'Xeon' }
-    ] },
-  { era: '2022 – 2023' },
-  { id: 'raptor13', arch: 'Raptor Lake (13th Gen)', color: '#22d3ee', year: '2022–2023', segment: 'client',
-    defaultLinks: [{ label: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/Raptor_Lake' }],
-    skus: [
-      { name: 'Raptor Lake-S', desc: 'Desktop processors', tags: ['desktop'], brand: 'Core' },
-      { name: 'Raptor Lake-HX', desc: 'Desktop CPUs repurposed for mobile processors', tags: ['mobile'], brand: 'Core' },
-      { name: 'Raptor Lake-H', desc: 'Mobile processors — high performance', tags: ['mobile'], brand: 'Core' },
-      { name: 'Raptor Lake-PX', desc: 'Mobile workstation tier', tags: ['mobile'], brand: 'Core' },
-      { name: 'Raptor Lake-P', desc: 'Mobile mainstream', tags: ['mobile'], brand: 'Core' },
-      { name: 'Raptor Lake-U', desc: 'Mobile ultrabook / low power', tags: ['mobile'], brand: 'Core' }
-    ] }
-];
+
+// Cache for loaded data to avoid redundant fetches
+const dataCache = {};
+
+// Loading state management
+let isLoading = false;
+let loadingVendor = null;
+
+/**
+ * Loads vendor data from JSON files dynamically
+ * @param {string} vendor - 'intel', 'amd', or 'amd-gpu'
+ * @returns {Promise<Array>} The loaded data array
+ */
+async function loadVendorData(vendor) {
+  // Return cached data if available
+  if (dataCache[vendor]) {
+    return dataCache[vendor];
+  }
+
+  // Prevent duplicate concurrent loads
+  if (isLoading && loadingVendor === vendor) {
+    // Wait for the current load to complete
+    while (isLoading && loadingVendor === vendor) {
+      await new Promise(resolve => setTimeout(resolve, 50));
+    }
+    return dataCache[vendor];
+  }
+
+  isLoading = true;
+  loadingVendor = vendor;
+
+  try {
+    const response = await fetch(`js/data/${vendor}-data.json`);
+
+    if (!response.ok) {
+      throw new Error(`Failed to load ${vendor} data: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    dataCache[vendor] = data;
+    return data;
+  } catch (error) {
+    console.error(`Error loading ${vendor} data:`, error);
+    // Return empty array as fallback
+    return [];
+  } finally {
+    isLoading = false;
+    loadingVendor = null;
+  }
+}
+
+/**
+ * Shows loading indicator in the timeline
+ */
+function showLoadingIndicator() {
+  const timeline = document.getElementById('timeline');
+  timeline.innerHTML = '<div class="loading-indicator">Loading data...</div>';
+}
+
+/**
+ * Hides loading indicator and restores timeline content
+ */
+function hideLoadingIndicator() {
+  // Loading indicator will be replaced by render()
+}
 
 // ════════════════════════════════════════
 // AMD DATA
@@ -592,7 +565,7 @@ function buildFilters() {
       if (filter === 'all') { activeSegmentTags.clear(); }
       else { activeSegmentTags = new Set([filter]); }
       syncLegendToggles();
-      render();
+      applyFilters();
     });
   });
 }
@@ -609,7 +582,7 @@ function buildGpuFilters() {
       el.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       activeGpuSegment = btn.dataset.filter;
-      render();
+      applyFilters();
     });
   });
 }
@@ -636,7 +609,7 @@ function toggleLegendTag(el) {
     }
   }
   updateLegendDimming();
-  render();
+  applyFilters();
 }
 
 function updateLegendDimming() {
@@ -669,7 +642,6 @@ function render() {
   perfStart('render');
 
   const timeline = dom.timeline;
-  const searchTerm = dom.searchInput.value.toLowerCase();
   const cfg = VENDOR_CONFIG[currentVendor];
   const isGpu = currentTechTab === 'gpu' && cfg.gpuData;
   const data = isGpu ? cfg.gpuData : cfg.data;
@@ -677,8 +649,9 @@ function render() {
   let animIndex = 0;
 
   if (isGpu) {
-    renderGpu(timeline, data, searchTerm);
+    renderGpu(timeline, data);
     perfEnd('render');
+    applyFilters();
     return;
   }
 
@@ -691,23 +664,6 @@ function render() {
       return;
     }
     const arch = entry;
-    const filteredSkus = arch.skus.filter(sku => {
-      const segmentPass = activeSegmentTags.size === 0 || sku.tags.some(t => activeSegmentTags.has(t));
-      const brandPass = activeBrandTags.size === 0 || (sku.brand && activeBrandTags.has(sku.brand));
-      const matchesSearch = !searchTerm ||
-        arch.arch.toLowerCase().includes(searchTerm) ||
-        (arch.segment || '').toLowerCase().includes(searchTerm) ||
-        (arch.subtitle || '').toLowerCase().includes(searchTerm) ||
-        sku.name.toLowerCase().includes(searchTerm) ||
-        sku.desc.toLowerCase().includes(searchTerm) ||
-        sku.tags.some(t => t.includes(searchTerm)) ||
-        (sku.brand && sku.brand.toLowerCase().includes(searchTerm)) ||
-        (typeof AMD_CPU_SPECS !== 'undefined' && AMD_CPU_SPECS[sku.name] && AMD_CPU_SPECS[sku.name].some(m => m.n.toLowerCase().includes(searchTerm)));
-      return segmentPass && brandPass && matchesSearch;
-    });
-    const noFilters = activeSegmentTags.size === 0 && activeBrandTags.size === 0 && !searchTerm;
-    const skusToShow = filteredSkus.length > 0 ? filteredSkus : (noFilters ? arch.skus : []);
-    if (skusToShow.length === 0) return;
 
     const isExpanded = expandedGroups.has(arch.id);
     const group = document.createElement('div');
@@ -716,6 +672,26 @@ function render() {
     group.dataset.id = arch.id;
     group.style.animationDelay = `${animIndex * 0.04}s`;
     animIndex++;
+
+    // Store filter metadata as data attributes for CSS-based filtering
+    const segmentTags = arch.skus.flatMap(sku => sku.tags).filter((v, i, a) => a.indexOf(v) === i);
+    const brandTags = arch.skus.map(sku => sku.brand).filter(Boolean).filter((v, i, a) => a.indexOf(v) === i);
+    const searchText = [
+      arch.arch,
+      arch.segment || '',
+      arch.subtitle || '',
+      ...arch.skus.flatMap(sku => [
+        sku.name,
+        sku.desc,
+        ...sku.tags,
+        sku.brand || '',
+        ...(typeof AMD_CPU_SPECS !== 'undefined' && AMD_CPU_SPECS[sku.name] ? AMD_CPU_SPECS[sku.name].map(m => m.n) : [])
+      ])
+    ].join('|').toLowerCase();
+
+    group.dataset.segments = segmentTags.join(',');
+    group.dataset.brands = brandTags.join(',');
+    group.dataset.searchText = searchText;
 
     const hasServer = arch.skus.some(s => s.tags.includes('server'));
     const hasClient = arch.skus.some(s => !s.tags.includes('server'));
@@ -736,7 +712,7 @@ function render() {
       <div class="arch-body">
         <button class="collapse-specs-btn" id="collapse-specs-${arch.id}" onclick="event.stopPropagation(); collapseAllSpecs('${arch.id}')">▴ Collapse</button>
         <div class="skus-grid">
-          ${skusToShow.map((sku, i) => {
+          ${arch.skus.map((sku, i) => {
             const cpuSpecs = (typeof AMD_CPU_SPECS !== 'undefined') ? AMD_CPU_SPECS[sku.name] : null;
             const hasSpecs = cpuSpecs && cpuSpecs.length > 0;
             const specId = arch.id + '-' + sku.name.replace(/[^a-zA-Z0-9]/g, '_');
@@ -813,46 +789,26 @@ function render() {
   }
 
   perfEnd('render');
+
+  // Apply current filters after rendering
+  applyFilters();
 }
 
 // ════════════════════════════════════════
 // GPU RENDER
 // ════════════════════════════════════════
-function renderGpu(timeline, data, searchTerm) {
+function renderGpu(timeline, data) {
   let animIndex = 0;
-  let pendingEra = null;
   data.forEach(entry => {
     if (entry.era) {
-      pendingEra = entry.era;
+      const sep = document.createElement('div');
+      sep.className = 'era-separator';
+      sep.innerHTML = `<span class="era-label">${entry.era}</span><div class="era-line"></div>`;
+      timeline.appendChild(sep);
       return;
     }
     const arch = entry;
     const specs = arch.gpuSpecs;
-
-    // Segment filter
-    if (activeGpuSegment === 'accelerator' && (specs.consumer || specs.workstation)) return;
-    if (activeGpuSegment === 'consumer' && !specs.consumer) return;
-    if (activeGpuSegment === 'workstation' && !specs.workstation) return;
-
-    // Search filter
-    if (searchTerm) {
-      const modelText = (specs.consumer || specs.workstation)
-        ? specs.models.map(m => `${m.name} ${m.cu} ${m.mem} ${m.memType} ${m.fp32} ${m.boost || ''}`)
-        : specs.models.map(m => `${m.name} ${m.arch} ${m.process} ${m.mem} ${m.memType}`);
-      const haystack = [arch.arch, arch.subtitle || '', specs.family, specs.desc,
-        ...modelText
-      ].join(' ').toLowerCase();
-      if (!haystack.includes(searchTerm)) return;
-    }
-
-    // Emit pending era separator if an entry passes filters
-    if (pendingEra) {
-      const sep = document.createElement('div');
-      sep.className = 'era-separator';
-      sep.innerHTML = `<span class="era-label">${pendingEra}</span><div class="era-line"></div>`;
-      timeline.appendChild(sep);
-      pendingEra = null;
-    }
 
     const isExpanded = expandedGroups.has(arch.id);
     const group = document.createElement('div');
@@ -861,6 +817,16 @@ function renderGpu(timeline, data, searchTerm) {
     group.dataset.id = arch.id;
     group.style.animationDelay = `${animIndex * 0.04}s`;
     animIndex++;
+
+    // Store filter metadata for CSS-based filtering
+    const gpuSegment = specs.consumer ? 'consumer' : specs.workstation ? 'workstation' : 'accelerator';
+    const modelText = (specs.consumer || specs.workstation)
+      ? specs.models.map(m => `${m.name} ${m.cu} ${m.mem} ${m.memType} ${m.fp32} ${m.boost || ''}`)
+      : specs.models.map(m => `${m.name} ${m.arch} ${m.process} ${m.mem} ${m.memType}`);
+    const searchText = [arch.arch, arch.subtitle || '', specs.family, specs.desc, ...modelText].join('|').toLowerCase();
+
+    group.dataset.gpuSegment = gpuSegment;
+    group.dataset.searchText = searchText;
 
     group.innerHTML = `
       <div class="arch-header" onclick="toggleGroup('${arch.id}')">
@@ -982,6 +948,84 @@ function renderGpu(timeline, data, searchTerm) {
 }
 
 // ════════════════════════════════════════
+// CSS-BASED FILTERING
+// ════════════════════════════════════════
+function applyFilters() {
+  perfStart('applyFilters');
+
+  const timeline = dom.timeline;
+  const searchTerm = dom.searchInput.value.toLowerCase();
+  const cfg = VENDOR_CONFIG[currentVendor];
+  const isGpu = currentTechTab === 'gpu' && cfg.gpuData;
+
+  const groups = timeline.querySelectorAll('.arch-group');
+
+  groups.forEach(group => {
+    let visible = true;
+
+    if (isGpu) {
+      // GPU filtering
+      const gpuSegment = group.dataset.gpuSegment;
+      const searchText = group.dataset.searchText;
+
+      // Segment filter
+      if (activeGpuSegment !== 'all' && gpuSegment !== activeGpuSegment) {
+        visible = false;
+      }
+
+      // Search filter
+      if (visible && searchTerm && !searchText.includes(searchTerm)) {
+        visible = false;
+      }
+    } else {
+      // CPU filtering
+      const segments = group.dataset.segments ? group.dataset.segments.split(',') : [];
+      const brands = group.dataset.brands ? group.dataset.brands.split(',') : [];
+      const searchText = group.dataset.searchText;
+
+      // Segment filter
+      if (activeSegmentTags.size > 0) {
+        const hasMatchingSegment = segments.some(seg => activeSegmentTags.has(seg));
+        if (!hasMatchingSegment) visible = false;
+      }
+
+      // Brand filter
+      if (visible && activeBrandTags.size > 0) {
+        const hasMatchingBrand = brands.some(brand => activeBrandTags.has(brand));
+        if (!hasMatchingBrand) visible = false;
+      }
+
+      // Search filter
+      if (visible && searchTerm && !searchText.includes(searchTerm)) {
+        visible = false;
+      }
+    }
+
+    group.classList.toggle('hidden', !visible);
+  });
+
+  // Hide orphan era separators
+  const children = [...timeline.children];
+  for (let i = 0; i < children.length; i++) {
+    const child = children[i];
+    if (child.classList.contains('era-separator')) {
+      // Check if next sibling is visible
+      let hasVisibleNext = false;
+      for (let j = i + 1; j < children.length; j++) {
+        if (children[j].classList.contains('era-separator')) break;
+        if (!children[j].classList.contains('hidden')) {
+          hasVisibleNext = true;
+          break;
+        }
+      }
+      child.classList.toggle('hidden', !hasVisibleNext);
+    }
+  }
+
+  perfEnd('applyFilters');
+}
+
+// ════════════════════════════════════════
 // HELPERS
 // ════════════════════════════════════════
 function toggleGroup(id) {
@@ -1055,8 +1099,8 @@ function removeLink(id, idx) {
 initDomCache();
 
 // Search (with debouncing for performance)
-const debouncedRender = debounce(render, 300);
-dom.searchInput.addEventListener('input', debouncedRender);
+const debouncedFilter = debounce(applyFilters, 300);
+dom.searchInput.addEventListener('input', debouncedFilter);
 
 // Expand/Collapse
 dom.expandAllBtn.addEventListener('click', () => {

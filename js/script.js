@@ -5,6 +5,9 @@
 // Cache for loaded data to avoid redundant fetches
 const dataCache = {};
 
+// Global CPU specs (loaded dynamically)
+let AMD_CPU_SPECS = undefined;
+
 // Loading state management
 let isLoading = false;
 let loadingVendor = null;
@@ -211,6 +214,19 @@ async function switchVendor(vendor) {
   // Load GPU data for AMD if not loaded
   if (vendor === 'amd' && !cfg.gpuData) {
     cfg.gpuData = await loadVendorData('amd-gpu');
+  }
+
+  // Load AMD CPU specs for detailed tables
+  if (vendor === 'amd' && typeof AMD_CPU_SPECS === 'undefined') {
+    try {
+      const response = await fetch('js/data/amd-cpu-specs.json');
+      if (response.ok) {
+        AMD_CPU_SPECS = await response.json();
+        console.log('AMD_CPU_SPECS loaded:', Object.keys(AMD_CPU_SPECS).length, 'codenames');
+      }
+    } catch (error) {
+      console.warn('Could not load AMD CPU specs:', error);
+    }
   }
 
   // Show/hide tech tabs

@@ -87,8 +87,8 @@
   .expand-icon { margin-left: auto; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); transition: transform 0.3s ease; font-size: 1.2rem; }
   .arch-group.expanded .expand-icon { transform: rotate(180deg); }
 
-  .arch-body { max-height: 0; overflow: hidden; transition: max-height 0.25s ease-out, padding 0.25s ease; padding: 0 20px; }
-  .arch-group.expanded .arch-body { max-height: 15000px; padding: 0 20px 20px; transition: max-height 0.35s ease-in, padding 0.25s ease; }
+  .arch-body { max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease; padding: 0 20px; }
+  .arch-group.expanded .arch-body { max-height: 15000px; padding: 0 20px 20px; }
   .skus-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 10px; margin-top: 8px; }
 
   .sku-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 14px 16px; transition: all 0.25s ease; cursor: default; position: relative; overflow: hidden; }

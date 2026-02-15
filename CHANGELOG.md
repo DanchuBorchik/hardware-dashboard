@@ -14,6 +14,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Constrained .skus-grid, .sku-card, and .cpu-spec-wrapper to 100% width with box-sizing
 
 ### Added
+- AMD GPU consumer and workstation data (2026-02-15):
+  - Parsed 244 GPU models from CSV files into JSON format
+  - Added 22 consumer GPU series (Radeon RX 9000, 7000, 6000, etc.)
+  - Added 13 workstation GPU series (Radeon PRO W7000, AI PRO, etc.)
+  - Merged with existing Instinct datacenter GPUs (7 series)
+  - Sorted by year (newest first) and performance within each year
+  - Total: 35 GPU series across all segments
+- GPU filtering system (2026-02-15):
+  - New segment filters: Datacenter, Workstation, Consumer
+  - Form factor filters: PCIe, OAM
+  - Visual legend with colored indicators for active filters
+  - Filter divider separating segment and form factor buttons
+  - Segment names updated: server → datacenter, desktop → consumer
 - Search clear button (2026-02-15):
   - X button appears inside search input when typing
   - Click to instantly clear search and reset results

@@ -139,6 +139,7 @@ let expandedGroups = new Set();
 let activeSegmentTags = new Set();
 let activeBrandTags = new Set();
 let activeGpuSegment = 'all';
+let activeGpuFormFactor = 'all';
 
 // ════════════════════════════════════════
 // CACHED DOM REFERENCES (Performance)
@@ -265,8 +266,8 @@ function switchTech(tab) {
   if (tab === 'gpu') {
     dom.pageHeader.innerHTML = `<h1 class="${cfg.headerClass}">${cfg.gpuTitle}</h1><p>Instinct · Radeon · Radeon PRO · FirePro</p>`;
     // Hide CPU-only UI
-    dom.legendToggles.innerHTML = '';
     dom.codenameTableWrap.innerHTML = '';
+    buildGpuLegend();
     buildGpuFilters();
   } else {
     dom.pageHeader.innerHTML = `<h1 class="${cfg.headerClass}">${cfg.title}</h1><p>Processor Architecture Generations</p>`;
@@ -360,18 +361,92 @@ function buildFilters() {
   });
 }
 
+function buildGpuLegend() {
+  const el = dom.legendToggles;
+  const segments = [
+    { tag: 'datacenter', label: 'Datacenter', color: '#ef4444' },
+    { tag: 'workstation', label: 'Workstation', color: '#818cf8' },
+    { tag: 'consumer', label: 'Consumer', color: '#10b981' }
+  ];
+
+  const formFactors = [
+    { tag: 'pcie', label: 'PCIe', color: '#60a5fa' },
+    { tag: 'oam', label: 'OAM', color: '#f59e0b' }
+  ];
+
+  let html = '';
+  segments.forEach(t => {
+    html += `<div class="legend-item gpu-legend-segment" data-tag="${t.tag}" style="--tag-color:${t.color}"><div class="legend-dot" style="background:${t.color}"></div>${t.label}</div>`;
+  });
+  html += '<div class="legend-sep"></div>';
+  formFactors.forEach(t => {
+    html += `<div class="legend-item gpu-legend-form" data-tag="${t.tag}" style="--tag-color:${t.color}"><div class="legend-dot" style="background:${t.color}"></div>${t.label}</div>`;
+  });
+  el.innerHTML = html;
+}
+
+// Update GPU legend to reflect active filters
+function updateGpuLegend() {
+  // Update segment indicators
+  document.querySelectorAll('.gpu-legend-segment').forEach(item => {
+    if (item.dataset.tag === activeGpuSegment) {
+      item.classList.add('active');
+    } else {
+      item.classList.remove('active');
+    }
+  });
+
+  // Update form factor indicators
+  document.querySelectorAll('.gpu-legend-form').forEach(item => {
+    if (item.dataset.tag === activeGpuFormFactor) {
+      item.classList.add('active');
+    } else {
+      item.classList.remove('active');
+    }
+  });
+}
+
 function buildGpuFilters() {
   activeGpuSegment = 'all';
+  activeGpuFormFactor = 'all';
   const el = document.getElementById('filterControls');
-  const buttons = ['all', 'accelerator', 'consumer', 'workstation'];
-  el.innerHTML = buttons.map(f =>
-    `<button class="filter-btn${f === 'all' ? ' active' : ''}" data-filter="${f}">${f.charAt(0).toUpperCase() + f.slice(1)}</button>`
+
+  // Segment filters
+  const segmentButtons = ['all', 'datacenter', 'workstation', 'consumer'];
+  const segmentHtml = segmentButtons.map(f =>
+    `<button class="filter-btn${f === 'all' ? ' active' : ''}" data-filter-type="segment" data-filter="${f}">${f.charAt(0).toUpperCase() + f.slice(1)}</button>`
   ).join('');
+
+  // Form factor filters
+  const formButtons = ['pcie', 'oam'];
+  const formHtml = formButtons.map(f =>
+    `<button class="filter-btn" data-filter-type="form" data-filter="${f}">${f.toUpperCase()}</button>`
+  ).join('');
+
+  el.innerHTML = segmentHtml + '<div class="filter-divider"></div>' + formHtml;
+
   el.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      el.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeGpuSegment = btn.dataset.filter;
+      const filterType = btn.dataset.filterType;
+      const filterValue = btn.dataset.filter;
+
+      if (filterType === 'segment') {
+        // Clear other segment buttons
+        el.querySelectorAll('[data-filter-type="segment"]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeGpuSegment = filterValue;
+      } else if (filterType === 'form') {
+        // Toggle form factor button
+        if (btn.classList.contains('active')) {
+          btn.classList.remove('active');
+          activeGpuFormFactor = 'all';
+        } else {
+          el.querySelectorAll('[data-filter-type="form"]').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeGpuFormFactor = filterValue;
+        }
+      }
+      updateGpuLegend();
       applyFilters();
     });
   });
@@ -616,13 +691,17 @@ function renderGpu(timeline, data) {
     animIndex++;
 
     // Store filter metadata for CSS-based filtering
-    const gpuSegment = specs.consumer ? 'consumer' : specs.workstation ? 'workstation' : 'accelerator';
+    const gpuSegment = arch.segment || 'datacenter'; // Use segment from data (datacenter, workstation, consumer)
     const modelText = (specs.consumer || specs.workstation)
       ? specs.models.map(m => `${m.name} ${m.cu} ${m.mem} ${m.memType} ${m.fp32} ${m.boost || ''}`)
       : specs.models.map(m => `${m.name} ${m.arch} ${m.process} ${m.mem} ${m.memType}`);
     const searchText = [arch.arch, arch.subtitle || '', specs.family, specs.desc, ...modelText].join('|').toLowerCase();
 
+    // Collect unique form factors from all models
+    const formFactors = [...new Set(specs.models.map(m => m.form).filter(Boolean))].join(',');
+
     group.dataset.gpuSegment = gpuSegment;
+    group.dataset.gpuForms = formFactors;
     group.dataset.searchText = searchText;
 
     group.innerHTML = `
@@ -630,7 +709,7 @@ function renderGpu(timeline, data) {
         <div class="timeline-dot"></div>
         <span class="arch-name">${arch.arch}</span>
         <span class="arch-year">${arch.year}</span>
-        <span class="arch-segment-badge ${specs.consumer ? 'client-badge' : specs.workstation ? 'workstation-badge' : 'server-badge'}">${specs.consumer ? 'Consumer' : specs.workstation ? 'Workstation' : 'Accelerator'}</span>
+        <span class="arch-segment-badge ${gpuSegment === 'consumer' ? 'client-badge' : gpuSegment === 'workstation' ? 'workstation-badge' : 'server-badge'}">${gpuSegment.charAt(0).toUpperCase() + gpuSegment.slice(1)}</span>
         <span class="expand-icon">▾</span>
         ${arch.subtitle ? `<div class="arch-subtitle">${arch.subtitle.replace(/ · /g, '<span class="sub-sep">·</span>')}</div>` : ''}
       </div>
@@ -763,11 +842,23 @@ function applyFilters() {
     if (isGpu) {
       // GPU filtering
       const gpuSegment = group.dataset.gpuSegment;
+      const gpuForms = group.dataset.gpuForms; // Comma-separated list of form factors
       const searchText = group.dataset.searchText;
 
       // Segment filter
       if (activeGpuSegment !== 'all' && gpuSegment !== activeGpuSegment) {
         visible = false;
+      }
+
+      // Form factor filter
+      if (visible && activeGpuFormFactor !== 'all') {
+        const forms = gpuForms ? gpuForms.toLowerCase().split(',') : [];
+        const hasMatchingForm = forms.some(form => {
+          if (activeGpuFormFactor === 'pcie') return form.includes('pcie');
+          if (activeGpuFormFactor === 'oam') return form.includes('oam');
+          return false;
+        });
+        if (!hasMatchingForm) visible = false;
       }
 
       // Search filter

@@ -25,3 +25,4 @@ TEST*.md
 debug*.html
 screenshots/
 archive/
+/data/

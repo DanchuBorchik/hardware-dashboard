@@ -5,6 +5,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+- Intel CPU detailed specifications (2026-02-15):
+  - Parsed intel_cpu_complete.csv into intel-cpu-specs.json (88KB, 219 CPUs, 25 architectures)
+  - All 216 unique CPU models verified accurate (100% field match with source CSV)
+  - Includes Arrow Lake, Raptor Lake, Alder Lake, Lunar Lake, Panther Lake, and more
+  - Server CPUs: Sapphire Rapids, Emerald Rapids, Granite Rapids, Sierra Forest, Diamond Rapids
+  - Matches AMD CPU spec table design and functionality
+  - Search now includes Intel CPU model names in results
+  - Expandable tables show detailed specs: cores, threads, clock speeds, cache, TDP, socket, PCIe, memory
+- Extended Intel architecture data (2026-02-15):
+  - Added Clearwater Forest (next-gen Xeon 6+ E-Core)
+  - Added Alder Lake variants (S, N)
+  - Added Xeon W-2400/2500 workstation processors
+  - Added Xeon D embedded processors
+  - Added Twin Lake, Comet Lake, Rocket Lake architectures
+- Unreleased architecture indicators (2026-02-15):
+  - Visual distinction for unreleased/future architectures (2025-2026)
+  - Red diagonal line overlay on architecture headers
+  - Larger italic "Unreleased" text label (red color)
+  - "No specs yet" message on SKU cards without data
+  - Applied to Nova Lake, Panther Lake, Diamond Rapids, Clearwater Forest
+- Tag filtering verification (2026-02-15):
+  - All 50 Intel SKUs properly tagged (desktop, mobile, server, embedded)
+  - Filter buttons work correctly for all segment tags
+  - Brand filtering supports Core Ultra, Core, Xeon, Xeon 6 variants
+
 ### Fixed
 - Mobile layout stability when expanding spec tables (2026-02-15):
   - Fixed font size inconsistency where SKU cards appeared larger after opening spec tables

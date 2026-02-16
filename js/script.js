@@ -7,6 +7,7 @@ const dataCache = {};
 
 // Global CPU specs (loaded dynamically)
 let AMD_CPU_SPECS = undefined;
+let INTEL_CPU_SPECS = undefined;
 
 // Loading state management
 let isLoading = false;
@@ -229,6 +230,19 @@ async function switchVendor(vendor) {
       }
     } catch (error) {
       console.warn('Could not load AMD CPU specs:', error);
+    }
+  }
+
+  // Load Intel CPU specs for detailed tables
+  if (vendor === 'intel' && typeof INTEL_CPU_SPECS === 'undefined') {
+    try {
+      const response = await fetch('js/data/intel-cpu-specs.json?v=' + Date.now());
+      if (response.ok) {
+        INTEL_CPU_SPECS = await response.json();
+        console.log('INTEL_CPU_SPECS loaded:', Object.keys(INTEL_CPU_SPECS).length, 'codenames');
+      }
+    } catch (error) {
+      console.warn('Could not load Intel CPU specs:', error);
     }
   }
 
@@ -557,7 +571,7 @@ function render() {
         sku.desc,
         ...sku.tags,
         sku.brand || '',
-        ...(typeof AMD_CPU_SPECS !== 'undefined' && AMD_CPU_SPECS[sku.name] ? AMD_CPU_SPECS[sku.name].map(m => m.n) : [])
+        ...((AMD_CPU_SPECS && AMD_CPU_SPECS[sku.name]) ? AMD_CPU_SPECS[sku.name].map(m => m.n) : (INTEL_CPU_SPECS && INTEL_CPU_SPECS[sku.name]) ? INTEL_CPU_SPECS[sku.name].map(m => m.n) : [])
       ])
     ].join('|').toLowerCase();
 
@@ -573,10 +587,11 @@ function render() {
     else segBadge = '<span class="arch-segment-badge client-badge">Client</span><span class="arch-segment-badge server-badge">Server</span>';
 
     group.innerHTML = `
-      <div class="arch-header" onclick="toggleGroup('${arch.id}')">
+      <div class="arch-header${arch.unreleased ? ' unreleased-arch' : ''}" onclick="toggleGroup('${arch.id}')">
         <div class="timeline-dot"></div>
         <span class="arch-name">${arch.arch}</span>
         <span class="arch-year">${arch.year}</span>
+        ${arch.unreleased ? '<span class="unreleased-badge">Unreleased</span>' : ''}
         ${segBadge}
         <span class="expand-icon">▾</span>
         ${arch.subtitle ? `<div class="arch-subtitle">${arch.subtitle.replace(/ · /g, '<span class="sub-sep">·</span>')}</div>` : ''}
@@ -585,18 +600,19 @@ function render() {
         <button class="collapse-specs-btn" id="collapse-specs-${arch.id}" onclick="event.stopPropagation(); collapseAllSpecs('${arch.id}')">▴ Collapse</button>
         <div class="skus-grid">
           ${arch.skus.map((sku, i) => {
-            const cpuSpecs = (typeof AMD_CPU_SPECS !== 'undefined') ? AMD_CPU_SPECS[sku.name] : null;
+            const cpuSpecs = (typeof AMD_CPU_SPECS !== 'undefined' && AMD_CPU_SPECS && AMD_CPU_SPECS[sku.name]) ? AMD_CPU_SPECS[sku.name]
+              : (typeof INTEL_CPU_SPECS !== 'undefined' && INTEL_CPU_SPECS && INTEL_CPU_SPECS[sku.name]) ? INTEL_CPU_SPECS[sku.name] : null;
             const hasSpecs = cpuSpecs && cpuSpecs.length > 0;
             const specId = arch.id + '-' + sku.name.replace(/[^a-zA-Z0-9]/g, '_');
             return `
-            <div class="sku-card${hasSpecs ? ' has-specs' : ''}" style="--card-order: ${i * 2};" data-sku-tags="${sku.tags.join(',')}" data-sku-brand="${sku.brand || ''}" ${hasSpecs ? `onclick="toggleCpuSpecs('${specId}')"` : ''}>
-              <div class="sku-name">${sku.name}${hasSpecs ? `<span class="sku-spec-count">${cpuSpecs.length} SKUs</span>` : ''}</div>
+            <div class="sku-card${hasSpecs ? ' has-specs' : ''}${arch.unreleased && !hasSpecs ? ' unreleased-sku' : ''}" style="--card-order: ${i * 2};" data-sku-tags="${sku.tags.join(',')}" data-sku-brand="${sku.brand || ''}" ${hasSpecs ? `onclick="toggleCpuSpecs('${specId}')"` : ''}>
+              <div class="sku-name">${sku.name}${hasSpecs ? `<span class="sku-spec-count">${cpuSpecs.length} SKUs</span>` : arch.unreleased ? '<span class="unreleased-notice">No specs yet</span>' : ''}</div>
               <div class="sku-desc">${sku.desc}</div>
               <div class="sku-tags">
                 ${sku.tags.map(t => `<span class="sku-tag ${t}">${t}</span>`).join('')}
                 ${sku.brand ? `<span class="sku-tag brand-${sku.brand.toLowerCase().replace(/\s+/g, '-')}">${sku.brand}</span>` : ''}
               </div>
-              ${hasSpecs ? '<div class="sku-spec-toggle">▾ Specs</div>' : ''}
+              ${hasSpecs ? '<div class="sku-spec-toggle">▾ Specs</div>' : arch.unreleased ? '<div class="sku-spec-toggle unreleased-text">Unreleased</div>' : ''}
             </div>
             ${hasSpecs ? `<div class="cpu-spec-wrapper" id="cpu-spec-${specId}" style="--spec-order: ${i * 2 + 1000};">
               <div class="cpu-spec-overflow">
@@ -888,17 +904,19 @@ function applyFilters() {
         // First check pre-built searchText
         let found = searchText.includes(searchTerm);
 
-        // If not found and AMD_CPU_SPECS is loaded, also search within spec table data
-        if (!found && currentVendor === 'amd' && AMD_CPU_SPECS) {
-          // Get all SKU names for this architecture
-          const skuCards = group.querySelectorAll('.sku-card');
-          for (const skuCard of skuCards) {
-            const skuName = skuCard.querySelector('.sku-name')?.textContent?.split(/\d+\sSKUs/)[0].trim();
-            if (skuName && AMD_CPU_SPECS[skuName]) {
-              const cpuModels = AMD_CPU_SPECS[skuName];
-              if (cpuModels.some(m => m.n.toLowerCase().includes(searchTerm))) {
-                found = true;
-                break;
+        // If not found, also search within CPU spec table data
+        if (!found) {
+          const specsSource = (currentVendor === 'amd' && AMD_CPU_SPECS) ? AMD_CPU_SPECS : (currentVendor === 'intel' && INTEL_CPU_SPECS) ? INTEL_CPU_SPECS : null;
+          if (specsSource) {
+            const skuCards = group.querySelectorAll('.sku-card');
+            for (const skuCard of skuCards) {
+              const skuName = skuCard.querySelector('.sku-name')?.textContent?.split(/\d+\sSKUs/)[0].trim();
+              if (skuName && specsSource[skuName]) {
+                const cpuModels = specsSource[skuName];
+                if (cpuModels.some(m => m.n.toLowerCase().includes(searchTerm))) {
+                  found = true;
+                  break;
+                }
               }
             }
           }
@@ -937,11 +955,14 @@ function applyFilters() {
           let found = cardText.includes(searchTerm);
 
           // If not found, also check CPU spec table data
-          if (!found && currentVendor === 'amd' && AMD_CPU_SPECS) {
-            const skuName = card.querySelector('.sku-name')?.textContent?.split(/\d+\sSKUs/)[0].trim();
-            if (skuName && AMD_CPU_SPECS[skuName]) {
-              const cpuModels = AMD_CPU_SPECS[skuName];
-              found = cpuModels.some(m => m.n.toLowerCase().includes(searchTerm));
+          if (!found) {
+            const specsSource = (currentVendor === 'amd' && AMD_CPU_SPECS) ? AMD_CPU_SPECS : (currentVendor === 'intel' && INTEL_CPU_SPECS) ? INTEL_CPU_SPECS : null;
+            if (specsSource) {
+              const skuName = card.querySelector('.sku-name')?.textContent?.split(/\d+\sSKUs/)[0].trim();
+              if (skuName && specsSource[skuName]) {
+                const cpuModels = specsSource[skuName];
+                found = cpuModels.some(m => m.n.toLowerCase().includes(searchTerm));
+              }
             }
           }
 
@@ -1007,7 +1028,7 @@ function highlightSearchMatches(searchTerm) {
   if (!searchTerm) return;
 
   // Highlight matching rows in CPU spec tables (works for all vendors)
-  if ((currentVendor === 'amd' && AMD_CPU_SPECS) || currentVendor === 'intel') {
+  if ((currentVendor === 'amd' && AMD_CPU_SPECS) || (currentVendor === 'intel' && INTEL_CPU_SPECS)) {
     document.querySelectorAll('.cpu-spec-table tbody tr').forEach(row => {
       const modelNameCell = row.querySelector('.cpu-model-name');
       if (modelNameCell) {

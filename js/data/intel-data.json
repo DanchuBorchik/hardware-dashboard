@@ -8,6 +8,7 @@
     "color": "#4ade80",
     "year": "2026",
     "segment": "client",
+    "unreleased": true,
     "defaultLinks": [
       {
         "label": "Wikipedia",
@@ -17,7 +18,7 @@
     "skus": [
       {
         "name": "Nova Lake",
-        "desc": "Next-gen mobile & desktop processors",
+        "desc": "Next-gen mobile & desktop processors (unreleased)",
         "tags": [
           "mobile",
           "desktop"
@@ -32,6 +33,7 @@
     "color": "#fbbf24",
     "year": "2026",
     "segment": "client",
+    "unreleased": true,
     "defaultLinks": [
       {
         "label": "Wikipedia",
@@ -66,6 +68,7 @@
     "color": "#f97316",
     "year": "2025–2026",
     "segment": "server",
+    "unreleased": true,
     "defaultLinks": [],
     "skus": [
       {
@@ -83,6 +86,23 @@
           "server"
         ],
         "brand": "Xeon"
+      }
+    ]
+  },
+  {
+    "id": "clearwater",
+    "arch": "Clearwater Forest",
+    "color": "#34d399",
+    "year": "2025–2026",
+    "segment": "server",
+    "unreleased": true,
+    "defaultLinks": [],
+    "skus": [
+      {
+        "name": "Clearwater Forest",
+        "desc": "Next-gen Xeon 6+ E-Core — successor to Sierra Forest",
+        "tags": ["server"],
+        "brand": "Xeon 6+"
       }
     ]
   },
@@ -409,6 +429,28 @@
           "server"
         ],
         "brand": "Xeon"
+      },
+      {
+        "name": "Xeon W-2400/2500",
+        "desc": "Raptor Lake-based workstation processors",
+        "tags": ["desktop", "server"],
+        "brand": "Xeon"
+      }
+    ]
+  },
+  {
+    "id": "xeond",
+    "arch": "Xeon D (Embedded)",
+    "color": "#a3a3a3",
+    "year": "2023–2024",
+    "segment": "server",
+    "defaultLinks": [],
+    "skus": [
+      {
+        "name": "Xeon D Embedded",
+        "desc": "Edge & embedded Xeon processors for networking and storage",
+        "tags": ["embedded", "server"],
+        "brand": "Xeon D"
       }
     ]
   },
@@ -475,6 +517,121 @@
           "mobile"
         ],
         "brand": "Core"
+      }
+    ]
+  },
+  {
+    "era": "2021 – 2022"
+  },
+  {
+    "id": "alder",
+    "arch": "Alder Lake (12th Gen)",
+    "color": "#fcd34d",
+    "year": "2021–2022",
+    "segment": "client",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Alder_Lake_(microprocessor)"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Alder Lake-S",
+        "desc": "Desktop processors — first hybrid architecture (P-core + E-core)",
+        "tags": ["desktop"],
+        "brand": "Core"
+      },
+      {
+        "name": "Alder Lake-N",
+        "desc": "Low-power E-core only processors for mobile & embedded",
+        "tags": ["mobile", "embedded"],
+        "brand": "Core"
+      }
+    ]
+  },
+  {
+    "id": "twinlake",
+    "arch": "Twin Lake",
+    "color": "#d4d4d4",
+    "year": "2024",
+    "segment": "client",
+    "defaultLinks": [],
+    "skus": [
+      {
+        "name": "Twin Lake",
+        "desc": "Low-power mobile processors (Core 3 N-series)",
+        "tags": ["mobile"],
+        "brand": "Core"
+      }
+    ]
+  },
+  {
+    "era": "2021"
+  },
+  {
+    "id": "rocket",
+    "arch": "Rocket Lake (11th Gen)",
+    "color": "#fb923c",
+    "year": "2021",
+    "segment": "client",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Rocket_Lake"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Rocket Lake-S",
+        "desc": "Desktop processors — Cypress Cove cores, PCIe 4.0",
+        "tags": ["desktop"],
+        "brand": "Core"
+      }
+    ]
+  },
+  {
+    "era": "2020"
+  },
+  {
+    "id": "comet",
+    "arch": "Comet Lake (10th Gen)",
+    "color": "#94a3b8",
+    "year": "2020",
+    "segment": "client",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Comet_Lake_(microprocessor)"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Comet Lake-S",
+        "desc": "Desktop processors — 14nm, up to 10 cores",
+        "tags": ["desktop"],
+        "brand": "Core"
+      }
+    ]
+  },
+  {
+    "id": "atom",
+    "arch": "Atom (Embedded)",
+    "color": "#78716c",
+    "year": "2017–2024",
+    "segment": "server",
+    "defaultLinks": [
+      {
+        "label": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Intel_Atom"
+      }
+    ],
+    "skus": [
+      {
+        "name": "Atom Embedded",
+        "desc": "Low-power embedded processors for IoT, networking, and edge",
+        "tags": ["embedded"],
+        "brand": "Atom"
       }
     ]
   }

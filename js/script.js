@@ -614,7 +614,7 @@ function render() {
               </div>
               ${hasSpecs ? '<div class="sku-spec-toggle">▾ Specs</div>' : arch.unreleased ? '<div class="sku-spec-toggle unreleased-text">Unreleased</div>' : ''}
             </div>
-            ${hasSpecs ? `<div class="cpu-spec-wrapper" id="cpu-spec-${specId}" style="--spec-order: ${i * 2 + 1000};">
+            ${hasSpecs ? `<div class="cpu-spec-wrapper" id="cpu-spec-${specId}" style="--spec-order: ${i * 2 + 1};">
               <div class="cpu-spec-overflow">
                 <table class="cpu-spec-table">
                   <thead><tr>
@@ -1107,48 +1107,41 @@ function toggleCpuSpecs(specId) {
     const grid = group.querySelector('.skus-grid');
     if (!grid) return;
 
-    // Clear all selected states and reset orders
-    group.querySelectorAll('.sku-card.selected').forEach(c => c.classList.remove('selected'));
-    group.querySelectorAll('.cpu-spec-wrapper').forEach(w => {
-      w.style.removeProperty('--spec-order');
-    });
-
-    // Toggle the spec wrapper
+    // Toggle the spec wrapper first
     wrapper.classList.toggle('open');
+    const isNowOpen = wrapper.classList.contains('open');
 
     // Update the clicked card
     if (card) {
       const toggle = card.querySelector('.sku-spec-toggle');
-      if (toggle) toggle.textContent = wrapper.classList.contains('open') ? '▴ Specs' : '▾ Specs';
-
-      // Add selected state if opening
-      if (isOpening) {
-        card.classList.add('selected');
-
-        // Calculate grid layout to position spec table after current row
-        const allCards = Array.from(grid.querySelectorAll('.sku-card'));
-        const cardIndex = allCards.indexOf(card);
-
-        // Get grid column count from computed style
-        const gridStyle = window.getComputedStyle(grid);
-        const gridCols = gridStyle.gridTemplateColumns.split(' ').length;
-
-        // Calculate which row this card is in (0-indexed)
-        const cardRow = Math.floor(cardIndex / gridCols);
-
-        // Calculate order value: place between last card of this row and first card of next row
-        // Cards have order: 0, 2, 4, 6, 8, 10, ...
-        // Last card in this row has order: (lastCardIndex * 2)
-        // First card in next row has order: ((lastCardIndex + 1) * 2)
-        // Place spec table in between with order: (lastCardIndex * 2) + 1
-        const lastCardInRow = (cardRow + 1) * gridCols - 1;
-        const orderValue = lastCardInRow * 2 + 1;
-
-        wrapper.style.setProperty('--spec-order', orderValue);
-      } else {
-        card.classList.remove('selected');
-      }
+      if (toggle) toggle.textContent = isNowOpen ? '▴ Specs' : '▾ Specs';
+      card.classList.toggle('selected', isNowOpen);
     }
+
+    // Recalculate order for ALL open spec tables in this group
+    const allCards = Array.from(grid.querySelectorAll('.sku-card'));
+    const openWrappers = Array.from(grid.querySelectorAll('.cpu-spec-wrapper.open'));
+
+    openWrappers.forEach(w => {
+      const wCard = w.previousElementSibling;
+      if (!wCard) return;
+
+      const cardIndex = allCards.indexOf(wCard);
+      if (cardIndex === -1) return;
+
+      // Get grid column count from computed style
+      const gridStyle = window.getComputedStyle(grid);
+      const gridCols = gridStyle.gridTemplateColumns.split(' ').length;
+
+      // Calculate which row this card is in
+      const cardRow = Math.floor(cardIndex / gridCols);
+
+      // Place spec table at end of the card's row
+      const lastCardInRow = (cardRow + 1) * gridCols - 1;
+      const orderValue = lastCardInRow * 2 + 1;
+
+      w.style.setProperty('--spec-order', orderValue);
+    });
 
     // Show/hide the collapse button for this arch-group
     updateCollapseBtn(group);

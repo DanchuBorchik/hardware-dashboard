@@ -77,6 +77,14 @@
         "brand": "Ryzen AI"
       },
       {
+        "name": "Kraken Point",
+        "desc": "Ryzen AI 300 series — mid-range laptop APUs (AI 7 350 / AI 5 340) with Zen 5/5c cores, RDNA 3.5 GPU & XDNA 2 NPU",
+        "tags": [
+          "laptop"
+        ],
+        "brand": "Ryzen AI"
+      },
+      {
         "name": "Gorgon Point",
         "desc": "Ryzen AI 400 series — next-gen laptop APUs with XDNA 2 NPU (Strix Point refresh)",
         "tags": [
